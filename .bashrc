@@ -122,10 +122,10 @@ eval $(thefuck --alias FUCK)
 
 alias p3=python3
 alias please=sudo
-alias clear=clear\;cat\ /home/kotfind/.linux_penguin
 
 export PS1="\[$(tput bold)\]\[$(tput setaf 4)\]\W\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
 
 tmux
 
 clear
+cat ~/.linux_penguin
