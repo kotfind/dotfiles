@@ -12,6 +12,7 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'majutsushi/tagbar'
 Plugin 'craigemery/vim-autotag'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'shirk/vim-gas'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
