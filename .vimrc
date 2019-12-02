@@ -66,7 +66,7 @@ set cursorline " подсветка текущей строки
 
 set autoread " автоматическое перечитывание файла при изменении
 
-set foldmethod=syntax " фолдинг (сворачивание блоков кода) (zc - свернуть, zo - развернуть)
+set foldmethod=indent " фолдинг (сворачивание блоков кода) (zc - свернуть, zo - развернуть)
 
 autocmd BufWinLeave *.* mkview          " | запоминание фолдинга
 autocmd BufWinEnter *.* silent loadview " |
@@ -80,6 +80,9 @@ imap {<CR> {}<LEFT><CR><CR><UP><TAB>
 "inoremap '' ''<LEFT>
 "inoremap <> <><LEFT>
 ""inoremap <SPACE><SPACE> <SPACE><SPACE><LEFT>
+
+" c++ start program
+nnoremap <F5> :!echo ----------------------------------------------------------------------------------------------------------------;./run_for_vim.sh<CR>
 
 inoremap <C-k> <C-o>gk
 inoremap <C-h> <Left>
