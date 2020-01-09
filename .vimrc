@@ -5,14 +5,15 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'majutsushi/tagbar'
 Plugin 'craigemery/vim-autotag'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'shirk/vim-gas'
+" Plugin 'shirk/vim-gas'
+" Plugin 'dense-analysis/ale'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -74,7 +75,7 @@ autocmd BufWinEnter *.* silent loadview " |
 "" автозакрывание скобок
 "imap [] []<LEFT>
 "imap () ()<LEFT>
-imap {<CR> {}<LEFT><CR><CR><UP><TAB>
+imap {<CR> {}<LEFT><CR><TAB>a<BACKSPACE><CR><UP><END>
 ""  <UP><ENTER><ENTER>
 "inoremap "" ""<LEFT>
 "inoremap '' ''<LEFT>
@@ -82,12 +83,17 @@ imap {<CR> {}<LEFT><CR><CR><UP><TAB>
 ""inoremap <SPACE><SPACE> <SPACE><SPACE><LEFT>
 
 " c++ start program
-nnoremap <F5> :!echo ----------------------------------------------------------------------------------------------------------------;./run_for_vim.sh<CR>
+nnoremap <F5> :!echo ----------------------------------------------------------------------------------------------------------------;./run.sh<CR>
 
 inoremap <C-k> <C-o>gk
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 inoremap <C-j> <C-o>gj
 
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+" undo dir
+set undodir=~/.vim/undodir
+set undofile
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_autoclose_preview_window_after_completion=1
