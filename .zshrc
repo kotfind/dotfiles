@@ -3,7 +3,7 @@ export ZSH="/home/kotfind/.oh-my-zsh"
 
 ZSH_THEME="agnoster" #"robbyrussell"
 CASE_SENSITIVE="true"
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 setopt HIST_IGNORE_DUPS
@@ -24,6 +24,7 @@ alias god="sudo su"
 alias gimme="sudo pacman -S "
 alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
+alias nt="sakura . &> /dev/null &!"
 
 # fasd
 eval "$(fasd --init auto)"

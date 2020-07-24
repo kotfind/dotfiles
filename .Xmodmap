@@ -1,3 +1,0 @@
-clear    Lock
-keycode  66 = Escape
-keycode 179 = XF86AudioMicMute NoSymbol XF86AudioMicMute

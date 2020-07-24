@@ -1,4 +1,3 @@
-# ~/.config/i3/config
 # set font
 font pango: Droid Fonts 10
 
@@ -148,7 +147,7 @@ mode "resize" {
         bindsym $down       resize grow height 1 px or 1 ppt
         bindsym $up         resize shrink height 1 px or 1 ppt
         bindsym $right      resize grow width 1 px or 1 ppt
-   
+
         # same bingings, but whit shift
         bindsym Shift+$left       resize shrink width 10 px or 10 ppt
         bindsym Shift+$down       resize grow height 10 px or 10 ppt
@@ -173,20 +172,32 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-        tray_output VGA-1
+        tray_output VGA-0
 }
 
 # no focus follow mouse
 focus_follows_mouse no
 
 # monitor setup
-exec_always xrandr --output DVI-D-1 --right-of VGA-1
-exec_always xrandr --output VGA-1 --primary
+# exec_always xrandr --output DVI-D-1 --right-of VGA-1
+# exec_always xrandr --output VGA-1 --primary
 
 # keyboard layout
-exec_always setxkbmap -layout us,ru
-#exec_always setxkbmap -option 'grp:alt_shift_toggle,grp_led:scroll'
-exec_always setxkbmap -option 'grp:win_space_toggle,grp:sclk_toggle,grp_led:scroll'
+exec_always xkbcomp ~/.config/xkb/my $DISPLAY
+#exec_always setxkbmap -layout us,ru
+#exec_always setxkbmap -option "grp:win_space_toggle,grp:sclk_toggle,grp_led:scroll"
+#exec_always setxkbmap -option "keypad:pointerkeys"
 
 # redshift
 exec --no-startup-id redshift-gtk
+
+# init ~/.Xmodmap
+exec_always xmodmap ~/.Xmodmap
+
+# floating windows
+for_window [class="glslViewer" instance="glslViewer"] floating enable
+for_window [class="xsane" instance="Xsane"] floating enable
+for_window [class="a.out" instance="a.out"] floating enable
+
+# wallpaper
+exec feh --bg-fill ~/Pictures/wallpaper/1591661844528.jpg
