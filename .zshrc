@@ -6,6 +6,7 @@ CASE_SENSITIVE="true"
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
+setopt rmstarsilent
 setopt HIST_IGNORE_DUPS
 
 # Plugins
