@@ -37,7 +37,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec synapse
+# bindsym $mod+d exec synapse
 
 # change focus
 bindsym $mod+$left focus left
@@ -182,18 +182,13 @@ focus_follows_mouse no
 # exec_always xrandr --output DVI-D-1 --right-of VGA-1
 # exec_always xrandr --output VGA-1 --primary
 
-# keyboard layout
-exec_always xkbcomp ~/.config/xkb/my $DISPLAY
-
 # redshift
 exec --no-startup-id redshift-gtk
-
-# init ~/.Xmodmap
-exec_always xmodmap ~/.Xmodmap
 
 # floating windows
 for_window [class="xsane" instance="Xsane"] floating enable
 for_window [class="a.out" instance="a.out"] floating enable
+for_window [class="lyceumQuest" instance="lyceumQuest"] floating enable
 
 # wallpaper
 exec feh --bg-fill ~/Pictures/wallpaper/1591661844528.jpg

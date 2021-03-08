@@ -1,7 +1,7 @@
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export ZSH="/home/kotfind/.oh-my-zsh"
 
-ZSH_THEME="agnoster" #"robbyrussell"
+ZSH_THEME="robbyrussell" #"agnoster"
 CASE_SENSITIVE="true"
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
@@ -10,7 +10,7 @@ setopt rmstarsilent
 setopt HIST_IGNORE_DUPS
 
 # Plugins
-plugins=(git sudo web-search zsh-syntax-highlighting zsh-autosuggestions fasd)
+plugins=(git sudo web-search zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -27,5 +27,5 @@ alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
 alias nt="sakura . &> /dev/null &!"
 
-# fasd
-eval "$(fasd --init auto)"
+# keyboard layout
+xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
