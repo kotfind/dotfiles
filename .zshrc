@@ -10,7 +10,7 @@ setopt rmstarsilent
 setopt HIST_IGNORE_DUPS
 
 # Plugins
-plugins=(git sudo web-search zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git pass sudo web-search zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
