@@ -12,9 +12,10 @@ Plugin 'lervag/vimtex'
 Plugin 'preservim/nerdtree'
 Plugin 'beyondmarc/glsl.vim'
 " Plugin 'mingchaoyan/vim-shaderlab'
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 " Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
+Plugin 'ycm-core/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -88,12 +89,18 @@ map <silent> <F3> :e .<CR>
 map <silent> <F4> :nohl<CR>
 
 " autocomplete
-:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabContextDefaultCompletionType = "<c-n"
-let g:SuperTabClosePreviewOnPopupClose=1
-set completeopt=menu,menuone,preview ",noselect
-set complete-=i
+" :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabContextDefaultCompletionType = "<c-n"
+" let g:SuperTabClosePreviewOnPopupClose=1
+" set completeopt=menu,menuone,preview ",noselect
+" set complete-=i
+
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+" python3 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 " vimtex
 let g:tex_flavor='latex'
