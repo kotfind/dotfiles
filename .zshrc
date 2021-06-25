@@ -25,7 +25,7 @@ alias god="sudo su"
 alias gimme="sudo pacman -S "
 alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
-alias nt="sakura . &> /dev/null &!"
+alias nt="xterm &> /dev/null &!"
 
 # keyboard layout
 xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1

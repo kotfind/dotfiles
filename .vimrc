@@ -100,6 +100,7 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_min_num_of_chars_for_completion=1
 " python3 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 " vimtex
