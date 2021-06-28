@@ -21,21 +21,22 @@ export EDITOR='vim'
 export ARCHFLAGS="-arch x86_64"
 
 # aliases
-alias god="sudo su"
-alias gimme="sudo pacman -S "
 alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
 alias nt="xterm &> /dev/null &!"
+alias exittmux="NOTMUX=true xterm &! exit"
 
 # keyboard layout
 xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
 
-# # tmux
-# if [ -z $TMUX ]; then
-#     tmux has -t default 2> /dev/null
-#     if [ $? != 0 ]; then
-#         exec tmux new -s default
-#     else
-#         exec tmux attach -t default
-#     fi
-# fi
+# tmux
+if [ ! $NOTMUX ]; then
+    if [ -z $TMUX ]; then
+        tmux has -t default 2> /dev/null
+        if [ $? != 0 ]; then
+            exec tmux new -s default
+        else
+            exec tmux attach -t default
+        fi
+    fi
+fi
