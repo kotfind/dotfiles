@@ -29,3 +29,13 @@ alias nt="xterm &> /dev/null &!"
 
 # keyboard layout
 xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
+
+# # tmux
+# if [ -z $TMUX ]; then
+#     tmux has -t default 2> /dev/null
+#     if [ $? != 0 ]; then
+#         exec tmux new -s default
+#     else
+#         exec tmux attach -t default
+#     fi
+# fi
