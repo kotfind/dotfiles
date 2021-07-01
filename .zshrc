@@ -25,12 +25,13 @@ alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
 alias nt="xterm &> /dev/null &!"
 alias exittmux="NOTMUX=true xterm &! exit"
+alias e="exec"
 
 # keyboard layout
 xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
 
 # tmux
-if [ ! $NOTMUX ]; then
+if [ ! $NOTMUX ] && [[ $0 != -* ]]; then
     if [ -z $TMUX ]; then
         tmux has -t default 2> /dev/null
         if [ $? != 0 ]; then
