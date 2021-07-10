@@ -23,7 +23,6 @@ export ARCHFLAGS="-arch x86_64"
 # aliases
 alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
-alias nt="xterm &> /dev/null &!"
 alias exittmux="NOTMUX=true xterm &! exit"
 alias e="exec"
 
