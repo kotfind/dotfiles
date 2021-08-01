@@ -51,51 +51,51 @@ set cin
 set showmatch
 set hlsearch
 set incsearch 
-set ignorecase
 
 set undodir=~/.vim/undodir
 set undofile
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-
 set mouse=
 " set ttymouse=
- 
-imap {<CR> {<CR>a<BACKSPACE><CR>}<UP><END>
-nnoremap ^] <Nop>
 
 set nowrap
 set foldmethod=syntax
-function! MyFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+function MyFoldText()
+    let foldchar = '.'
+    let line = substitute(getline(v:foldstart), '^\s*', '', 'g')
+    let lines_cnt = v:foldend - v:foldstart + 1
+    let cnt_text = '| ' . printf('%4s', lines_cnt) . ' |'
+    let text_start = repeat(foldchar, (v:foldlevel - 1) * 4) . line
+    let text_end = cnt_text . repeat(foldchar, 4)
+    let len = strlen(text_start . text_end) + 4
+    return text_start . repeat(foldchar, winwidth(0) - len) . text_end
 endfunction
 set foldtext=MyFoldText()
 hi Folded ctermbg=black
 
-" F1 keys bindings
-nnoremap <F5> :!echo --------------------; make -j<CR>
-nnoremap <F6> :!echo --------------------; make -j run<CR>
-nnoremap <F7> :!echo --------------------; make -j debug<CR>
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
+" Mappings
+nnoremap <F5> make -j4<CR>
+nnoremap <F6> make -j4 run<CR>
+nnoremap <F7> make -j4 debug<CR>
 nnoremap <silent> <F2> :TagbarOpenAutoClose<CR>
-map <silent> <F3> :e .<CR>
+noremap <silent> <F3> :e .<CR>
 map <silent> <F4> :nohl<CR>
 
-" autocomplete
-" :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextDefaultCompletionType = "<c-n"
-" let g:SuperTabClosePreviewOnPopupClose=1
-" set completeopt=menu,menuone,preview ",noselect
-" set complete-=i
+inoremap {<CR> {<CR>a<BACKSPACE><CR>}<UP><END>
+nnoremap ^] <Nop>
 
+inoremap jk <ESC>
+noremap gp "+p
+noremap gP "+P
+noremap gy "+y
+noremap gY "+Y
+
+" YCM
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -107,8 +107,6 @@ let g:ycm_min_num_of_chars_for_completion=1
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-" set conceallevel=2
-" let g:tex_conceal="abdgm"
 hi clear Conceal
 
 " UltiSnips
