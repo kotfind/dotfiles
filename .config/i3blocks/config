@@ -1,0 +1,62 @@
+color=#f3f4f5
+separator_block_width=15
+markup=none
+
+[gpu-load]
+command=~/i3blocks-contrib/gpu-load/gpu-load | awk '{print $1;}'
+label= 
+interval=1
+#min_width=GPU 100% 100% 100% 100%
+#GPU_BRAND=NVIDIA // or AMD
+T_WARN=70
+T_CRIT=90
+
+[cpu_usage]
+command=~/i3blocks-contrib/cpu_usage/cpu_usage
+interval=1
+LABEL= 
+#min_width=CPU: 100.00%
+T_WARN=50
+T_CRIT=80
+#DECIMALS=2
+
+# [my_cpu_usage]
+# command=mpstat -P ALL 0 | awk '{print $4}' | tail -n+4 | sed -z 's/\n/%, /g' | sed 's/[.][0-9][0-9]%/&:/' | sed 's/,//' | awk '{print $0}' 2>&1
+# interval=1
+# color=#F79494
+
+[ram]
+command=~/i3blocks-contrib/memory/memory | grep -E -o '^[0-9]+.[0-9]G'
+label= 
+interval=1
+
+[ip]
+command=ip -o -f inet a | awk '/scope global/ {print $4}'
+interval=5
+color=#91E78B
+label= 
+
+[mail]
+command=sylpheed --status "#imap/kotfind@yandex.ru/INBOX" | awk '{print $2;}'
+label= 
+interval=64
+
+[volume-pulseaudio]
+command=~/i3blocks-contrib/volume-pulseaudio/volume-pulseaudio
+interval=1
+signal=10
+LONG_FORMAT="${SYMB}${VOL}%"
+SHORT_FORMAT="${SYMB}${VOL}%"
+DEFAULT_COLOR="#f3f4f5"
+USE_ALSA_NAME=1
+
+[battery]
+command=~/i3blocks-contrib/battery/battery
+interval=30
+LABEL=BAT
+LABEL=⚡
+#BAT_NUMBER=0
+
+[time]
+command=date +"%y-%m-%d %H:%M:%S"
+interval=1
