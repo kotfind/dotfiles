@@ -95,6 +95,16 @@ noremap gP "+P
 noremap gy "+y
 noremap gY "+Y
 
+noremap s "_d
+noremap S "_D
+
+noremap Q @@
+
+noremap gwh <C-w>h
+noremap gwj <C-w>j
+noremap gwk <C-w>k
+noremap gwl <C-w>l
+
 " YCM
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_confirm_extra_conf = 0
