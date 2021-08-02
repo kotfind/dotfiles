@@ -19,8 +19,6 @@ HIST_STAMPS="yyyy-mm-dd"
 # Plugins
 plugins=(git pass sudo web-search zsh-autosuggestions zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
-
 # Global variables
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export ZSH="/home/kotfind/.oh-my-zsh"
@@ -30,7 +28,13 @@ export EDITOR="vim"
 export ARCHFLAGS="-arch x86_64"
 export MANPAGER="vim -c MANPAGER -"
 
+source $ZSH/oh-my-zsh.sh
+
 # Aliases
 alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
 alias e="exec"
+alias lock="i3lock-fancy-multimonitor -b=0x8"
+
+# Swap ESC and CAPS
+xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
