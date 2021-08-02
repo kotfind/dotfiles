@@ -79,9 +79,9 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 
 " Mappings
-nnoremap <F5> make -j4<CR>
-nnoremap <F6> make -j4 run<CR>
-nnoremap <F7> make -j4 debug<CR>
+nnoremap <F5> :!make -j4<CR>
+nnoremap <F6> :!make -j4 run<CR>
+nnoremap <F7> :!make -j4 debug<CR>
 nnoremap <silent> <F2> :TagbarOpenAutoClose<CR>
 noremap <silent> <F3> :e .<CR>
 map <silent> <F4> :nohl<CR>
@@ -94,9 +94,6 @@ noremap gp "+p
 noremap gP "+P
 noremap gy "+y
 noremap gY "+Y
-
-noremap s "_d
-noremap S "_D
 
 noremap Q @@
 
