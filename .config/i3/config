@@ -4,6 +4,9 @@ font pango: MesloLGS NF Regular 10
 # nm-applet
 exec --no-startup-id nm-applet
 
+# swap ESC and CAPS
+exec --no-xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
+
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks
@@ -131,9 +134,6 @@ for_window [class="xsane"] floating enable
 for_window [class="vlc"]   sticky enable
 for_window [class="skype"] floating enable
 
-# Assign windows to workspaces
-assign [class="Alacritty"] $ws1
-
 # Colours
 # class                 border  backgr. text    indicator child_border
 client.focused          #2b83a6 #2b83a6 #ffffff #dddddd   #2b83a6
@@ -145,7 +145,7 @@ client.background       #212121
 
 # start i3bar to display a workspace bar
 bar {
-    status_command          i3blocks
+    status_command          SCRIPT_DIR=/usr/lib/i3blocks i3blocks
     bindsym button4         nop
     bindsym button5         nop
     position                bottom

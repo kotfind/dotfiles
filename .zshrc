@@ -35,6 +35,3 @@ alias ls="ls --group-directories-first --color=auto"
 alias p3="python3"
 alias e="exec"
 alias lock="i3lock-fancy-multimonitor -b=0x8"
-
-# Swap ESC and CAPS
-xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
