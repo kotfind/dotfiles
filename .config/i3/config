@@ -5,7 +5,7 @@ font pango: MesloLGS NF Regular 10
 exec --no-startup-id nm-applet
 
 # swap ESC and CAPS
-exec --no-xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
+exec_always xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks
