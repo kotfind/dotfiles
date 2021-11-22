@@ -1,9 +1,0 @@
-*Background: black
-*Foreground: white
-*metaSendsEscape: true
-*faceName: Monospace
-*faceSize: 12
-
-*VT100.Translations: #override \
-     Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
-     Ctrl Shift <Key>C: copy-selection(CLIPBOARD)
