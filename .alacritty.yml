@@ -35,3 +35,11 @@ bell:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: false
+
+scrolling:
+  history: 10000
+
+  multiplier: 3
+  faux_multiplier: 3
+
+  auto_scroll: false
