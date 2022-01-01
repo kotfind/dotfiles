@@ -23,9 +23,9 @@ Plugin 'lervag/vimtex'
 Plugin 'preservim/nerdtree'
 
 Plugin 'SirVer/ultisnips'
-    let g:UltiSnipsExpandTrigger = "<c-j>"
-    " let g:UltiSnipsJumpForwardTrigger = "<c-j>"
-    " let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+    let g:UltiSnipsExpandTrigger = "<c-l>"
+    let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
 Plugin 'ycm-core/YouCompleteMe'
     let g:ycm_show_diagnostics_ui = 0
@@ -34,19 +34,20 @@ Plugin 'ycm-core/YouCompleteMe'
     let g:ycm_autoclose_preview_window_after_completion = 1
     let g:ycm_min_num_of_chars_for_completion=1
     " python3 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
-    fun! ToggleYCMAutoComplete()
-        if !exists('g:ycm_auto_trigger')
-            return
-        endif
+    let g:ycm_filetype_blacklist = { 'tex': 1 }
+    " fun! ToggleYCMAutoComplete()
+    "     if !exists('g:ycm_auto_trigger')
+    "         return
+    "     endif
 
-        if g:ycm_auto_trigger
-            let g:ycm_auto_trigger=0
-        else
-            let g:ycm_auto_trigger=1
-        endif
-    endfun
+    "     if g:ycm_auto_trigger
+    "         let g:ycm_auto_trigger=0
+    "     else
+    "         let g:ycm_auto_trigger=1
+    "     endif
+    " endfun
 
-    nnoremap <F8> :call ToggleYCMAutoComplete()<CR>
+    " nnoremap <F8> :call ToggleYCMAutoComplete()<CR>
 
 call vundle#end()
 filetype plugin indent on
@@ -69,8 +70,7 @@ set confirm
 set t_Co=256
 set background=dark
 
-filetype plugin on
-syntax on
+syntax off
 
 set tabstop=4
 set shiftwidth=4
@@ -82,6 +82,7 @@ set cin
 set showmatch
 set hlsearch
 set incsearch 
+set ignorecase
 
 set undodir=~/.vim/undodir
 set undofile
@@ -113,6 +114,7 @@ autocmd BufWinEnter *.* silent loadview
 nnoremap <F5> :!make -j4<CR>
 nnoremap <F6> :!make -j4 run<CR>
 nnoremap <F7> :!make -j4 debug<CR>
+nnoremap <F8> :!TMP=$(mktemp) && g++ % -Wall -Wextra -Wpedantic -o $TMP && $TMP && rm $TMP <CR>
 nnoremap <silent> <F2> :TagbarOpenAutoClose<CR>
 noremap <silent> <F3> :e .<CR>
 map <silent> <F4> :nohl<CR>
