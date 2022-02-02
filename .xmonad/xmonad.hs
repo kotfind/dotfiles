@@ -35,7 +35,7 @@ startup = do
 myLayout = 
     tiled
     ||| noBorders Full
-    ||| Spiral L XMonad.Layout.Dwindle.CW (1/1) (11/10) 
+    ||| Spiral R XMonad.Layout.Dwindle.CW (1/1) (11/10) 
   where
     tiled    = Tall nmaster delta ratio
     nmaster  = 1
@@ -44,7 +44,9 @@ myLayout =
 
 myManageHook = composeAll
     [ className =? "stalonetray"    --> doIgnore <+> doF copyToAll <+> doF swapUp
+    , className =? "zoom"           --> doFloat
     , isDialog                      --> doFloat
+    , title =? "doFloat"            --> doFloat
     ]
 
 my_terminal :: String
