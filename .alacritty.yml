@@ -7,7 +7,6 @@ window:
 scrolling:
   history: 0
 
-# Font configuration
 font:
   normal:
     family: "MesloLGS NF"
