@@ -70,7 +70,7 @@ set confirm
 set t_Co=256
 set background=dark
 
-syntax off
+syntax on
 
 set tabstop=4
 set shiftwidth=4
@@ -119,7 +119,8 @@ nnoremap <silent> <F2> :TagbarOpenAutoClose<CR>
 noremap <silent> <F3> :e .<CR>
 map <silent> <F4> :nohl<CR>
 
-inoremap {<CR> {<CR>a<BACKSPACE><CR>}<UP><END>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {; {<CR>};<Esc>O
 nnoremap ^] <Nop>
 
 inoremap jk <ESC>
