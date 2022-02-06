@@ -7,10 +7,12 @@ import XMonad.Util.Ungrab
 import XMonad.Util.Run
 import XMonad.StackSet
 import XMonad.Layout.Dwindle
+import XMonad.Layout.ThreeColumns
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.CopyWindow
+import XMonad.Layout.Spacing
 
 
 
@@ -18,7 +20,7 @@ main = xmonad $ ewmh def
     { terminal              = my_terminal
     , modMask               = mod4Mask
     , handleEventHook       = fullscreenEventHook
-    , layoutHook            = myLayout
+    , layoutHook            = smartBorders myLayout
     , startupHook           = startup
     , borderWidth           = 2
     , normalBorderColor     = "black"
@@ -32,15 +34,10 @@ startup = do
     spawn "xscreensaver --no-splash"
     spawn "pgrep stalonetray > /dev/null || stalonetray"
 
-myLayout = 
-    tiled
-    ||| noBorders Full
-    ||| Spiral R XMonad.Layout.Dwindle.CW (1/1) (11/10) 
-  where
-    tiled    = Tall nmaster delta ratio
-    nmaster  = 1
-    ratio    = 1/2
-    delta    = 3/100
+myLayout = spacing 5 $ 
+        Tall 2 (3/100) (1/2)
+    ||| ThreeColMid 1 (3/100) (5/12)
+    ||| Full
 
 myManageHook = composeAll
     [ className =? "stalonetray"    --> doIgnore <+> doF copyToAll <+> doF swapUp
