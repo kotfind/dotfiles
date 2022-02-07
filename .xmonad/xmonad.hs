@@ -14,27 +14,27 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.CopyWindow
 import XMonad.Layout.Spacing
 
-
-
-main = xmonad $ ewmh def
-    { terminal              = my_terminal
-    , modMask               = mod4Mask
-    , handleEventHook       = fullscreenEventHook
-    , layoutHook            = smartBorders myLayout
-    , startupHook           = startup
-    , borderWidth           = 2
-    , normalBorderColor     = "black"
-    , focusedBorderColor    = "orange"   
-    , manageHook            = myManageHook
-    } `removeKeysP` myRemoveKeysP `additionalKeysP` myAdditionalKeysP
+main = do
+    xmonad $ ewmh def
+        { terminal              = my_terminal
+        , modMask               = mod4Mask
+        , handleEventHook       = fullscreenEventHook
+        , layoutHook            = smartBorders myLayout
+        , startupHook           = startup
+        , borderWidth           = 2
+        , normalBorderColor     = "black"
+        , focusedBorderColor    = "orange"   
+        , manageHook            = myManageHook
+        } `removeKeysP` myRemoveKeysP `additionalKeysP` myAdditionalKeysP
 
 startup = do
     setWMName "LG3D"
     spawn "xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1"
     spawn "xscreensaver --no-splash"
     spawn "pgrep stalonetray > /dev/null || stalonetray"
+    spawn "watch -n 60 feh --bg-fill --randomize ~/.wallpapers"
 
-myLayout = spacing 5 $ 
+myLayout = spacing 15 $ 
         Tall 2 (3/100) (1/2)
     ||| ThreeColMid 1 (3/100) (5/12)
     ||| Full
