@@ -32,7 +32,7 @@ startup = do
     spawn "xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1"
     spawn "xscreensaver --no-splash"
     spawn "pgrep stalonetray > /dev/null || stalonetray"
-    spawn "watch -n 60 feh --bg-fill --randomize ~/.wallpapers"
+    spawn "feh --bg-fill ~/.wallpapers/main"
 
 myLayout = spacing 15 $ 
         Tall 2 (3/100) (1/2)
