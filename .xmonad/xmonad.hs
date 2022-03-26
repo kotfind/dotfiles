@@ -34,9 +34,9 @@ startup = do
     spawn "pgrep stalonetray > /dev/null || stalonetray"
     spawn "feh --bg-fill ~/.wallpapers/main"
 
-myLayout = spacing 15 $ 
+myLayout = spacing 10 $ 
         Tall 2 (3/100) (1/2)
-    ||| ThreeColMid 1 (3/100) (5/12)
+    ||| ThreeColMid 1 (3/100) (1/3)
     ||| Full
 
 myManageHook = composeAll
