@@ -17,7 +17,7 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 # Plugins
-plugins=(git pass sudo web-search zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git pass sudo zsh-autosuggestions zsh-syntax-highlighting)
 
 # Global variables
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
@@ -31,9 +31,10 @@ export MANPAGER="vim -c MANPAGER -"
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
+unalias -m '*'
 alias ls="ls --group-directories-first --color=auto"
+alias l="ls -hl"
+alias L="l -a"
 alias p3="python3"
 alias e="exec"
-alias lock="i3lock-fancy-multimonitor -b=0x8"
-alias far="wineconsole ~/.wine/drive_c/Program\ Files/Far/Far.exe"
 alias tmx="exec sh -c \"tmux attach -t 0 || tmux\""
