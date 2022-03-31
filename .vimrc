@@ -124,6 +124,14 @@ inoremap {; {<CR>};<Esc>O
 nnoremap ^] <Nop>
 
 inoremap jk <ESC>
+inoremap kj <ESC>
+inoremap Jk <ESC>
+inoremap Kj <ESC>
+inoremap jK <ESC>
+inoremap kJ <ESC>
+inoremap JK <ESC>
+inoremap KJ <ESC>
+
 noremap gp "+p
 noremap gP "+P
 noremap gy "+y
