@@ -36,8 +36,7 @@ startup = do
 
 myLayout = spacing 10 $ 
         Tall 2 (3/100) (1/2)
-    ||| ThreeColMid 1 (3/100) (1/3)
-    ||| Full
+    ||| noBorders Full
 
 myManageHook = composeAll
     [ className =? "stalonetray"    --> doIgnore <+> doF copyToAll <+> doF swapUp
@@ -60,7 +59,8 @@ myRemoveKeysP = []
 myAdditionalKeysP =
     [ ("M-<Return>", spawn my_terminal)
     , ("M-S-<Return>", windows swapMaster)
-    , ("M-p", spawn "rofi -combi-modi window,run,drun -show combi -modi combi")
+    , ("M-p", spawn "rofi -show drun")
+    , ("M-w", spawn "rofi -show windows")
     , ("M-d", spawnSelected def ["telegram-desktop", "vk"])
     , ("M-S-z", spawn "xscreensaver-command -lock && systemctl suspend")
     , ("M-z", spawn "xscreensaver-command -lock")
