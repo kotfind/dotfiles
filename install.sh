@@ -10,5 +10,5 @@ find . \
     -not -path "./install.sh" \
     -type f \
     -exec echo Linking \{\} \; \
-    -exec ln -s $(readlink -f \{\}) ~/\{\} \;
+    -exec ln -sf $(readlink -f \{\}) ~/\{\} \;
 
