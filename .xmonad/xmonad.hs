@@ -35,7 +35,7 @@ startup = do
     spawn "feh --bg-fill ~/.wallpapers/main"
 
 myLayout = spacing 10 $ 
-        Tall 2 (3/100) (1/2)
+        Tall 1 (3/100) (1/2)
     ||| noBorders Full
 
 myManageHook = composeAll
