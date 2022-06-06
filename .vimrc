@@ -33,7 +33,6 @@ Plugin 'ycm-core/YouCompleteMe'
     let g:ycm_autoclose_preview_window_after_insertion = 1
     let g:ycm_autoclose_preview_window_after_completion = 1
     let g:ycm_min_num_of_chars_for_completion=1
-    " python3 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
     let g:ycm_filetype_blacklist = { 'tex': 1 }
     " fun! ToggleYCMAutoComplete()
     "     if !exists('g:ycm_auto_trigger')

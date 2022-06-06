@@ -1,0 +1,2 @@
+xmonad --recompile
+exec xmonad
