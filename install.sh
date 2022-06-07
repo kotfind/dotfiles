@@ -4,7 +4,7 @@
 
 NEEDED_PACKAGES="zsh \
     xorg-server xorg-xinit \
-    xmonad xmonad-contrib rofi stalonetray xscreensaver scrot\
+    xmonad xmonad-contrib rofi stalonetray xscreensaver scrot feh\
     alacritty xorg-xkbutils \
     python3 cmake \
     zsh-theme-powerlevel10k ttf-meslo-nerd-font-powerlevel10k"
