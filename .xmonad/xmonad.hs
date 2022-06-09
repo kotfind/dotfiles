@@ -59,8 +59,8 @@ myRemoveKeysP = []
 myAdditionalKeysP =
     [ ("M-<Return>", spawn my_terminal)
     , ("M-S-<Return>", windows swapMaster)
-    , ("M-p", spawn "rofi -show drun")
-    , ("M-w", spawn "rofi -show windows")
+    , ("M-p", spawn "rofi -show drun -modi drun")
+    , ("M-w", spawn "rofi -show window")
     , ("M-d", spawnSelected def ["telegram-desktop", "vk"])
     , ("M-S-z", spawn "xscreensaver-command -lock && systemctl suspend")
     , ("M-z", spawn "xscreensaver-command -lock")
