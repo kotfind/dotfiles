@@ -109,6 +109,9 @@ hi Folded ctermbg=black
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 
+" Command Line Mode Autocompletion
+set wildmenu
+
 " Mappings
 nnoremap <F5> :!make -j4<CR>
 nnoremap <F6> :!make -j4 run<CR>
