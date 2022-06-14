@@ -6,7 +6,7 @@ NEEDED_PACKAGES="zsh \
     xorg-server xorg-xinit \
     xmonad xmonad-contrib rofi stalonetray xscreensaver scrot feh\
     alacritty xorg-xkbutils \
-    python3 cmake \
+    python3 cmake ctags\
     zsh-theme-powerlevel10k ttf-meslo-nerd-font-powerlevel10k"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
