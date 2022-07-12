@@ -41,6 +41,7 @@ myLayout = spacing 10 $
 myManageHook = composeAll
     [ className =? "stalonetray"    --> doIgnore <+> doF copyToAll <+> doF swapUp
     , className =? "zoom"           --> doFloat
+    , className =? "learning_graph" --> doFloat
     , isDialog                      --> doFloat
     , title =? "doFloat"            --> doFloat
     ]
@@ -62,7 +63,7 @@ myAdditionalKeysP =
     , ("M-p", spawn "rofi -show drun -modi drun")
     , ("M-w", spawn "rofi -show window")
     , ("M-d", spawnSelected def ["telegram-desktop", "vk"])
-    , ("M-S-z", spawn "xscreensaver-command -lock && systemctl suspend")
+    , ("M-S-z", spawn "xscreensaver-command -lock && systemctl suspend -i")
     , ("M-z", spawn "xscreensaver-command -lock")
     , ("<Print>",   unGrab *> spawn (scrotCmd ""))
     , ("C-<Print>", unGrab *> spawn (scrotCmd "-u -f"))
