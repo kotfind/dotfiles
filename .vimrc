@@ -111,6 +111,7 @@ autocmd BufWinEnter *.* silent loadview
 
 " Command Line Mode Autocompletion
 set wildmenu
+set wildmode=longest:full,full
 
 " Mappings
 nnoremap <F5> :!make -j4<CR>
