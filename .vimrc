@@ -48,6 +48,11 @@ Plugin 'ycm-core/YouCompleteMe'
 
     " nnoremap <F8> :call ToggleYCMAutoComplete()<CR>
 
+Plugin 'vim-scripts/dbext.vim'
+Plugin 'alvan/vim-closetag'
+Plugin 'lepture/vim-jinja'
+    let g:closetag_filetypes = 'html,jinja'
+
 call vundle#end()
 filetype plugin indent on
 
