@@ -7,7 +7,7 @@ NEEDED_PACKAGES="zsh \
     xmonad xmonad-contrib rofi stalonetray xscreensaver scrot feh\
     alacritty xorg-xkbutils \
     python3 cmake ctags\
-    zsh-theme-powerlevel10k ttf-meslo-nerd-font-powerlevel10k"
+    ttf-meslo-nerd-font-powerlevel10k"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
 if ! [ $? -eq 0 ]; then
@@ -15,7 +15,7 @@ if ! [ $? -eq 0 ]; then
     exit 1
 fi
 
-# Install zsh, oh-my-zsh and powerlevel10k
+# Install zsh and oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 
 find . \

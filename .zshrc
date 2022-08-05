@@ -1,14 +1,9 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# Prompt
+autoload -Uz vcs_info # for git
+precmd () { vcs_info } # for git
+zstyle ':vcs_info:git*' formats '%F{blue}(%s)%f ' # git format
+PROMPT='%B%F{green}%2~%f%b ${vcs_info_msg_0_}'
+RPROMPT='%(?.%F{green}OK%f.%F{red}%?%f) %F{yellow}%n@%m%f'
 
 # Zsh options
 CASE_SENSITIVE="true"
