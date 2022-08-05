@@ -47,7 +47,7 @@ myManageHook = composeAll
     ]
 
 my_terminal :: String
-my_terminal = "alacritty"
+my_terminal = "kitty"
 
 scrot_dir :: String
 scrot_dir = "~/Pictures/"

@@ -5,9 +5,9 @@
 NEEDED_PACKAGES="zsh \
     xorg-server xorg-xinit \
     xmonad xmonad-contrib rofi stalonetray xscreensaver scrot feh\
-    alacritty xorg-xkbutils \
+    kitty\
     python3 cmake ctags\
-    ttf-meslo-nerd-font-powerlevel10k"
+    ttf-fira-code"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
 if ! [ $? -eq 0 ]; then
