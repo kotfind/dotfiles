@@ -1,7 +1,16 @@
 # Prompt
-autoload -Uz vcs_info # for git
-precmd () { vcs_info } # for git
-zstyle ':vcs_info:git*' formats '%F{blue}(%s)%f' # git format
+autoload -Uz vcs_info add-zsh-hook
+setopt prompt_subst
+add-zsh-hook precmd vcs_info
+precmd () {
+    vcs_info
+}
+
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr ' %F{red}u%f'
+zstyle ':vcs_info:*' stagedstr ' %F{green}s%f'
+zstyle ':vcs_info:git:*' formats '%F{blue}(%b%f%u%c%F{blue})%f'
+
 PROMPT='%B%F{green}%2~%f%b ${vcs_info_msg_0_} %F{blue}%#%f '
 RPROMPT='%(?.%F{green}OK%f.%F{red}%?%f) %F{yellow}%n@%m%f'
 
