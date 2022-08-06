@@ -12,7 +12,7 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 # Plugins
-plugins=(git pass doas zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git pass doas zsh-autosuggestions zsh-syntax-highlighting zsh-kitty)
 
 # Global variables
 export PATH=$HOME/.cabal/bin:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
