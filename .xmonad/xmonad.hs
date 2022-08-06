@@ -6,23 +6,20 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
 import XMonad.Util.Run
 import XMonad.StackSet
-import XMonad.Layout.Dwindle
-import XMonad.Layout.ThreeColumns
-import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.CopyWindow
 import XMonad.Layout.Spacing
+import XMonad.Layout.Gaps
 
 main = do
-    xmonad $ ewmh def
+    xmonad $ ewmhFullscreen $ ewmh def
         { terminal              = my_terminal
         , modMask               = mod4Mask
-        , handleEventHook       = fullscreenEventHook
-        , layoutHook            = smartBorders myLayout
+        , layoutHook            = myLayout
         , startupHook           = startup
         , borderWidth           = 2
-        , normalBorderColor     = "black"
+        , normalBorderColor     = "gray"
         , focusedBorderColor    = "orange"   
         , manageHook            = myManageHook
         } `removeKeysP` myRemoveKeysP `additionalKeysP` myAdditionalKeysP
@@ -31,15 +28,20 @@ startup = do
     setWMName "LG3D"
     spawn "xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1"
     spawn "xscreensaver --no-splash"
-    spawn "pgrep stalonetray > /dev/null || stalonetray"
+    spawn "pgrep stalonetray > /dev/null || stalonetray --geometry 1x1-0-0 --icon-size 20 --background \"#000000\""
     spawn "feh --bg-fill ~/.wallpaper"
 
-myLayout = spacing 10 $ 
+myLayout =
+    spacing (gapSize `div` 2)  $
+    gaps ((\d -> (d, gapSize `div` 2)) <$> [U, D, R, L]) $
+
         Tall 1 (3/100) (1/2)
     ||| noBorders Full
+      where
+       gapSize = 5 :: Int
 
 myManageHook = composeAll
-    [ className =? "stalonetray"    --> doIgnore <+> doF copyToAll <+> doF swapUp
+    [ className =? "stalonetray"    --> doIgnore <+> doF copyToAll
     , className =? "zoom"           --> doFloat
     , className =? "learning_graph" --> doFloat
     , isDialog                      --> doFloat
