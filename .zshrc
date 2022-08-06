@@ -1,8 +1,8 @@
 # Prompt
 autoload -Uz vcs_info # for git
 precmd () { vcs_info } # for git
-zstyle ':vcs_info:git*' formats '%F{blue}(%s)%f ' # git format
-PROMPT='%B%F{green}%2~%f%b ${vcs_info_msg_0_}'
+zstyle ':vcs_info:git*' formats '%F{blue}(%s)%f' # git format
+PROMPT='%B%F{green}%2~%f%b ${vcs_info_msg_0_} %F{blue}%#%f '
 RPROMPT='%(?.%F{green}OK%f.%F{red}%?%f) %F{yellow}%n@%m%f'
 
 # Zsh options
