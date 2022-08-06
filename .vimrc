@@ -129,7 +129,6 @@ map <silent> <F4> :nohl<CR>
 
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {; {<CR>};<Esc>O
-nnoremap ^] <Nop>
 
 inoremap jk <ESC>
 inoremap Jk <ESC>
