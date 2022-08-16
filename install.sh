@@ -4,7 +4,7 @@
 
 NEEDED_PACKAGES="zsh \
     xorg-server xorg-xinit \
-    xmonad xmonad-contrib rofi stalonetray xscreensaver scrot feh\
+    xmonad xmonad-contrib rofi stalonetray xsecurelock xss-lock scrot feh\
     kitty\
     python3 cmake ctags\
     ttf-fira-code"

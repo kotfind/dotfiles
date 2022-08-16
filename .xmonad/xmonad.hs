@@ -27,7 +27,12 @@ main = do
 startup = do
     setWMName "LG3D"
     spawn "xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1"
-    spawn "xscreensaver --no-splash"
+    spawn " \
+        \XSECURELOCK_DISCARD_FIRST_KEYPRESS=0 \
+        \XSECURELOCK_IMAGE_DURATION_SECONDS=1000 \
+        \XSECURELOCK_LIST_VIDEOS_COMMAND=\"echo /home/kotfind/.lock_wallpaper\" \
+        \XSECURELOCK_SAVER=saver_mpv \
+        \xss-lock xsecurelock"
     spawn "pgrep stalonetray > /dev/null || stalonetray --geometry 5x1-0-0 --icon-size 20 --background \"#000000\""
     spawn "feh --bg-fill ~/.wallpaper"
 
@@ -65,8 +70,9 @@ myAdditionalKeysP =
     , ("M-p", spawn "rofi -show drun -modi drun")
     , ("M-w", spawn "rofi -show window")
     , ("M-d", spawnSelected def ["telegram-desktop", "vk"])
-    , ("M-S-z", spawn "xscreensaver-command -lock && systemctl suspend -i")
-    , ("M-z", spawn "xscreensaver-command -lock")
+    , ("M-z", spawn "loginctl lock-session")
+    , ("M-S-z", spawn "systemctl suspend -i")
+    , ("M-C-S-z", spawn "systemctl hibernate -i")
     , ("<Print>",   unGrab *> spawn (scrotCmd ""))
     , ("C-<Print>", unGrab *> spawn (scrotCmd "-u -f"))
     , ("S-<Print>", unGrab *> spawn (scrotCmd "-s -f"))
