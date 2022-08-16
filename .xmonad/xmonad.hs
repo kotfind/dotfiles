@@ -28,7 +28,7 @@ startup = do
     setWMName "LG3D"
     spawn "xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1"
     spawn "xscreensaver --no-splash"
-    spawn "pgrep stalonetray > /dev/null || stalonetray --geometry 1x1-0-0 --icon-size 20 --background \"#000000\""
+    spawn "pgrep stalonetray > /dev/null || stalonetray --geometry 5x1-0-0 --icon-size 20 --background \"#000000\""
     spawn "feh --bg-fill ~/.wallpaper"
 
 myLayout =
