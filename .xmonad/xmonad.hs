@@ -33,8 +33,10 @@ startup = do
         \XSECURELOCK_LIST_VIDEOS_COMMAND=\"echo /home/kotfind/.lock_wallpaper\" \
         \XSECURELOCK_SAVER=saver_mpv \
         \xss-lock xsecurelock"
-    spawn "pgrep stalonetray > /dev/null || stalonetray --geometry 5x1-0-0 --icon-size 20 --background \"#000000\""
+    spawn "killall stalonetray || stalonetray --geometry 5x1-0+0 --icon-size 20 --background \"#000000\""
     spawn "feh --bg-fill ~/.wallpaper"
+    spawn "/usr/lib/notification-daemon-1.0/notification-daemon"
+    spawn "batsignal"
 
 myLayout =
     spacing (gapSize `div` 2)  $
