@@ -27,27 +27,6 @@ Plugin 'SirVer/ultisnips'
     let g:UltiSnipsJumpForwardTrigger = "<c-j>"
     let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
-Plugin 'ycm-core/YouCompleteMe'
-    let g:ycm_show_diagnostics_ui = 0
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-    let g:ycm_autoclose_preview_window_after_completion = 1
-    let g:ycm_min_num_of_chars_for_completion=1
-    let g:ycm_filetype_blacklist = { 'tex': 1 }
-    " fun! ToggleYCMAutoComplete()
-    "     if !exists('g:ycm_auto_trigger')
-    "         return
-    "     endif
-
-    "     if g:ycm_auto_trigger
-    "         let g:ycm_auto_trigger=0
-    "     else
-    "         let g:ycm_auto_trigger=1
-    "     endif
-    " endfun
-
-    " nnoremap <F8> :call ToggleYCMAutoComplete()<CR>
-
 Plugin 'vim-scripts/dbext.vim'
 Plugin 'alvan/vim-closetag'
 Plugin 'lepture/vim-jinja'
