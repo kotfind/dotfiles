@@ -50,7 +50,6 @@ myLayout =
 myManageHook = composeAll
     [ className =? "stalonetray"    --> doIgnore <+> doF copyToAll
     , className =? "zoom"           --> doFloat
-    , className =? "learning_graph" --> doFloat
     , isDialog                      --> doFloat
     , title =? "doFloat"            --> doFloat
     ]
