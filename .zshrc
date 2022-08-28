@@ -53,3 +53,4 @@ alias gd="git diff"
 alias gdc="git diff --cached"
 alias gr="git restore"
 alias gl="git log"
+alias gt="git log --graph --all --oneline --decorate" # git tree
