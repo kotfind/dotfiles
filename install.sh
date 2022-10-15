@@ -37,9 +37,3 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/redxtech/zsh-kitty ~/.oh-my-zsh/custom/plugins/zsh-kitty
 git clone https://github.com/anatolykopyl/doas-zsh-plugin.git ~/.oh-my-zsh/custom/plugins/doas
-
-# Vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-mkdir -p ~/.vim/undodir
-vim -c ":PluginInstall" -c ":qa"
-python3 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
