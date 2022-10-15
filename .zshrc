@@ -42,6 +42,7 @@ alias L="l -a"
 alias p3="python3"
 alias e="exec"
 alias tmx="exec sh -c \"tmux attach -t 0 || tmux\""
+alias vim="nvim"
 
 # Git aliases
 alias gs="git status"
