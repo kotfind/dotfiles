@@ -15,6 +15,8 @@ require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip'
 
     use 'alvan/vim-closetag'
+
+    use 'vladdoster/remember.nvim'
 end)
 
 ---------- Lualine ----------
