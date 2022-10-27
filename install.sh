@@ -7,7 +7,8 @@ NEEDED_PACKAGES="zsh \
     xmonad xmonad-contrib rofi stalonetray xsecurelock xss-lock scrot feh\
     kitty\
     python3 cmake ctags\
-    ttf-fira-code"
+    ttf-fira-code\
+    nvim-packer-git"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
 if ! [ $? -eq 0 ]; then
