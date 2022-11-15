@@ -16,7 +16,7 @@ require('packer').startup(function(use)
 
     use 'alvan/vim-closetag'
 
-    use 'vladdoster/remember.nvim'
+    use({ 'vladdoster/remember.nvim', config = [[ require('remember') ]] })
 end)
 
 ---------- Lualine ----------
