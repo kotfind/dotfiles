@@ -24,7 +24,7 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(git pass doas zsh-autosuggestions zsh-syntax-highlighting zsh-kitty)
 
 # Global variables
-export PATH=$HOME/.cabal/bin:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH="/usr/lib/qt6/:/usr/lib/qt6/bin/:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
