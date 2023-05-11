@@ -1,2 +1,1 @@
-xmonad --recompile
-exec xmonad
+exec dwm 2> ~/.dwm.log
