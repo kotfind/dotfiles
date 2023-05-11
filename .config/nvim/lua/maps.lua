@@ -31,3 +31,8 @@ map('i', '{;', '{<CR>};<Esc>O')
 
 -- terminal normal mode
 map('t', '<esc><space>', '<c-\\><c-n>')
+
+-- ./run
+map('n', '<F5>', ':vsp term://./run<CR>G')
+map('n', '<F6>', ':e term://./run<CR>G')
+
