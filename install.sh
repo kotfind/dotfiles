@@ -38,3 +38,13 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/redxtech/zsh-kitty ~/.oh-my-zsh/custom/plugins/zsh-kitty
 git clone https://github.com/anatolykopyl/doas-zsh-plugin.git ~/.oh-my-zsh/custom/plugins/doas
+
+# Clone suckless config repos
+mkdir -p ~/suckless
+cd ~/suckless
+for tool in dwm slock slstatus; do
+    git clone git@github.com:kotfind/${tool}-config.git $tool
+    cd $tool
+    make && doas make install
+    cd ..
+done
