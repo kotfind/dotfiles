@@ -136,5 +136,11 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 require('luasnip.loaders.from_vscode').lazy_load()
 
 lspconfig.pyright.setup({})
-lspconfig.clangd.setup({})
+lspconfig.ccls.setup({});
+-- lspconfig.clangd.setup({
+--     cmd = {
+--         "clangd",
+--         "--header-insertion=never"
+--     }
+-- })
 lspconfig.texlab.setup({})
