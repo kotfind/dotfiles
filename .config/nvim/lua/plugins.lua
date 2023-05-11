@@ -9,6 +9,7 @@ require('packer').startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-nvim-lsp'
+    use 'Issafalcon/lsp-overloads.nvim'
 
     use 'saadparwaiz1/cmp_luasnip'
     use 'rafamadriz/friendly-snippets'
@@ -18,12 +19,25 @@ require('packer').startup(function(use)
 
     use({ 'vladdoster/remember.nvim', config = [[ require('remember') ]] })
 
-    use 'lepture/vim-jinja'
+    -- use 'lepture/vim-jinja'
+
+    use 'tikhomirov/vim-glsl'
+
+    use 'aklt/plantuml-syntax'
 end)
 
 ---------- Lualine ----------
+
 require('lualine').setup({
     options = {
-        theme = 'auto'
-    }
+        theme = 'auto',
+    },
+    sections = {
+      lualine_a = {'mode'},
+      lualine_b = {},
+      lualine_c = {'filename'},
+      lualine_x = {'encoding', 'filetype'},
+      lualine_y = {'progress'},
+      lualine_z = {'location'}
+    },
 })
