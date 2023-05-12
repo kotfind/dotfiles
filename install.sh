@@ -1,14 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 # Check if packages installed
 
 NEEDED_PACKAGES="zsh \
-    xorg-server xorg-xinit \
-    xmonad xmonad-contrib rofi stalonetray xsecurelock xss-lock scrot feh\
-    kitty\
-    python3 cmake ctags\
-    ttf-fira-code\
-    nvim-packer-git"
+xorg-server xorg-xinit \
+dmenu \
+ttf-fira-code \
+nvim-packer-git"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
 if ! [ $? -eq 0 ]; then
@@ -42,7 +40,7 @@ git clone https://github.com/anatolykopyl/doas-zsh-plugin.git ~/.oh-my-zsh/custo
 # Clone suckless config repos
 mkdir -p ~/suckless
 cd ~/suckless
-for tool in dwm slock slstatus; do
+for tool in dwm slock slstatus st; do
     git clone git@github.com:kotfind/${tool}-config.git $tool
     cd $tool
     make && doas make install
