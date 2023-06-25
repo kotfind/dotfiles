@@ -2,7 +2,7 @@
 
 # Check if packages installed
 
-NEEDED_PACKAGES="zsh \
+NEEDED_PACKAGES="fish \
 xorg-server xorg-xinit \
 dmenu \
 ttf-fira-code \
@@ -13,9 +13,6 @@ if ! [ $? -eq 0 ]; then
     echo -e "Error: All these packages should be installed:\n$NEEDED_PACKAGES"
     exit 1
 fi
-
-# Install zsh and oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 
 find . \
     -not -path "./.git*" \
@@ -30,12 +27,6 @@ find . \
     -type f \
     -exec echo Linking \{\} \; \
     -exec ln -sf $(readlink -f \{\}) ~/\{\} \;
-
-# Oh-My-Zsh Plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-git clone https://github.com/redxtech/zsh-kitty ~/.oh-my-zsh/custom/plugins/zsh-kitty
-git clone https://github.com/anatolykopyl/doas-zsh-plugin.git ~/.oh-my-zsh/custom/plugins/doas
 
 # Clone suckless config repos
 mkdir -p ~/suckless
