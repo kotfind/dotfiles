@@ -24,6 +24,8 @@ require('packer').startup(function(use)
     use 'tikhomirov/vim-glsl'
 
     use 'aklt/plantuml-syntax'
+
+    use 'nvim-treesitter/nvim-treesitter'
 end)
 
 ---------- Lualine ----------
@@ -41,3 +43,38 @@ require('lualine').setup({
       lualine_z = {'location'}
     },
 })
+
+---------- TreeSitter --------------------
+
+require('nvim-treesitter.configs').setup({
+    ensure_installed = {
+        "python",
+        "bash",
+        "c",
+        "cpp",
+        "latex",
+    },
+
+    -- Install languages synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- List of parsers to ignore installing
+    ignore_install = { "" },
+
+    highlight = {
+        -- `false` will disable the whole extension
+        enable = true,
+
+        -- list of language that will be disabled
+        disable = { "" },
+    },
+
+    indent = {
+        -- dont enable this, messes up python indentation
+        enable = false,
+        disable = {},
+    },
+})
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
