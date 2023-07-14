@@ -1,3 +1,5 @@
+#!/bin/sh
+
 run() {
     pgrep -f $1 &> /dev/null || $* &> /dev/null &
 }
@@ -8,4 +10,4 @@ run slstatus
 run xss-lock slock
 run batsignal
 run /usr/lib/notification-daemon-1.0/notification-daemon
-run lxqt-policykit-agent
+# run lxqt-policykit-agent

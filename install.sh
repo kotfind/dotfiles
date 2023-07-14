@@ -3,9 +3,10 @@
 # Check if packages installed
 
 NEEDED_PACKAGES="fish \
-xorg-server xorg-xinit \
-dmenu \
+xorg-server xorg-xinit\
+dmenu exa scrot xclip light pamixer \
 ttf-fira-code \
+xss-lock batsignal notification-daemon
 nvim-packer-git"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
@@ -34,6 +35,6 @@ cd ~/suckless
 for tool in dwm slock slstatus st; do
     git clone git@github.com:kotfind/${tool}-config.git $tool
     cd $tool
-    make && doas make install
+    make && sudo make install
     cd ..
 done
