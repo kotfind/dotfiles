@@ -26,6 +26,10 @@ require('packer').startup(function(use)
     use 'aklt/plantuml-syntax'
 
     use 'nvim-treesitter/nvim-treesitter'
+
+    -- use 'lukas-reineke/indent-blankline.nvim'
+
+    use 'm4xshen/autoclose.nvim'
 end)
 
 ---------- Lualine ----------
@@ -78,3 +82,13 @@ require('nvim-treesitter.configs').setup({
 
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
+-- ---------- Blankline ----------
+-- require("indent_blankline").setup {
+--     -- for example, context is off by default, use this to turn it on
+--     show_current_context = true,
+--     show_current_context_start = true,
+-- }
+
+---------- Autoclose ----------
+require("autoclose").setup()

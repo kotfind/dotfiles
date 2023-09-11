@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 run() {
-    pgrep -f $1 &> /dev/null || $* &> /dev/null &
+    pgrep -f $1 || $* &
 }
 
 xkbcomp ~/.config/xkb/my $DISPLAY > /dev/null 2>&1
 xrdb ~/.Xresources
-run slstatus
+# run slstatus
 run xss-lock slock
 run batsignal
 run /usr/lib/notification-daemon-1.0/notification-daemon

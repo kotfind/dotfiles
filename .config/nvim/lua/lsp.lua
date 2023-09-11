@@ -144,3 +144,4 @@ lspconfig.ccls.setup({});
 --     }
 -- })
 lspconfig.texlab.setup({})
+lspconfig.rust_analyzer.setup({})

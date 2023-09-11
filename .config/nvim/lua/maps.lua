@@ -25,9 +25,9 @@ map({'n', 'x'}, 'gy', '"+y', op)
 map('v', '<', '<gv', op)
 map('v', '>', '>gv', op)
 
--- autoclose brackerts
-map('i', '{<cr>', '{<CR>}<Esc>O')
-map('i', '{;', '{<CR>};<Esc>O')
+-- -- autoclose brackerts
+-- map('i', '{<cr>', '{<CR>}<Esc>O')
+-- map('i', '{;', '{<CR>};<Esc>O')
 
 -- terminal normal mode
 map('t', '<esc><space>', '<c-\\><c-n>')
