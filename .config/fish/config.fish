@@ -8,6 +8,7 @@ set -gx EDITOR nvim
 # Path
 fish_add_path /usr/lib/qt6/
 fish_add_path /usr/lib/qt6/bin
+fish_add_path /opt
 
 # Reset abbreviations
 set -g fish_user_abbreviations
