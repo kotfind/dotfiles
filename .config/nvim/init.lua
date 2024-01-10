@@ -91,11 +91,19 @@ require'lazy'.setup({
             sections = {
               lualine_a = {'mode'},
               lualine_b = {},
-              lualine_c = {'filename'},
+              lualine_c = {{'filename', path = 1}},
               lualine_x = {'encoding', 'filetype'},
               lualine_y = {'progress'},
               lualine_z = {'location'}
             },
+          inactive_sections = {
+            lualine_a = {},
+            lualine_b = {},
+            lualine_c = {{'filename', path = 1}},
+            lualine_x = {'location'},
+            lualine_y = {},
+            lualine_z = {}
+          },
         }
     },
 
@@ -134,33 +142,6 @@ require'lazy'.setup({
             })
         end
     },
-
-    -- {
-    --     'VonHeikemen/fine-cmdline.nvim',
-    --     dependencies = {
-    --         'MunifTanjim/nui.nvim'
-    --     },
-    --     config = function()
-    --         o.cmdheight = 0
-    --         local cmdline = require 'fine-cmdline'
-
-    --         local open_fn = function() cmdline.open({default_value = ''}) end
-    --         map({'n', 'x'}, ':', open_fn)
-    --         map({'n', 'x'}, '<CR>', open_fn)
-
-    --         cmdline.setup({
-    --             cmdline = {
-    --                 prompt = ''
-    --             },
-    --             hooks = {
-    --                 set_keymaps = function(imap, feedkeys)
-    --                     imap('<C-w>', '<C-o>vbd')
-    --                     imap('<Esc>', cmdline.fn.close)
-    --                 end
-    --             }
-    --         })
-    --     end
-    -- },
  
     ---------- Bindings ----------
     {'m4xshen/autoclose.nvim', opts = {}}, -- close brackets
@@ -189,17 +170,19 @@ require'lazy'.setup({
 })
 
 -------------------- LSP General --------------------
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end -- disable diagnostics
+local lsp = vim.lsp
+
+lsp.handlers["textDocument/publishDiagnostics"] = function() end -- disable diagnostics
+
+map('n', '<leader>r', lsp.buf.rename)
+map('n', 'K', lsp.buf.hover)
+map('n', 'gd', lsp.buf.definition)
+map('n', 'gD', lsp.buf.declaration)
 
 local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false -- disable snippets
 
 local lspconfig = require 'lspconfig'
-
-map('n', 'K', vim.lsp.buf.hover)
-map('n', 'gd', vim.lsp.buf.definition)
-map('n', 'gD', vim.lsp.buf.declaration)
-map('n', '<leader>r', vim.lsp.buf.rename)
 
 local cmp = require 'cmp'
 
@@ -246,19 +229,11 @@ cmp.setup {
 }
 
 -------------------- LSP Servers --------------------
-lspconfig.pyright.setup {
-    capabilities = capabilities,
-}
+lspconfig.pyright.setup { capabilities = capabilities, }
 
-lspconfig.clangd.setup {
-    capabilities = capabilities,
-}
+lspconfig.clangd.setup { capabilities = capabilities, }
 
-lspconfig.texlab.setup {
-    capabilities = capabilities,
-}
+lspconfig.texlab.setup { capabilities = capabilities, }
 
-lspconfig.rust_analyzer.setup {
-    capabilities = capabilities,
-}
+lspconfig.rust_analyzer.setup { capabilities = capabilities, }
 
