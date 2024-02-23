@@ -12,4 +12,4 @@ run batsignal
 run /usr/lib/notification-daemon-1.0/notification-daemon
 # run lxqt-policykit-agent
 
-mkdir -f /tmp/TmpDownloads /tmp/TmpScreenshots
+mkdir -p /tmp/TmpDownloads /tmp/TmpScreenshots
