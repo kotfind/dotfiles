@@ -57,7 +57,7 @@ map('n', '<F7>', ':!./run<CR>')
 map({'n', 'x'}, '<leader>p', '"+p')
 map({'n', 'x'}, '<leader>P', '"+P')
 map({'n', 'x'}, '<leader>y', '"+y')
-map({'n', 'x'}, '<leader>yy', '"+yy')
+map('n', '<leader>yy', '"+yy')
 
 -------------------- Plugins --------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -150,6 +150,11 @@ require'lazy'.setup({
  
     ---------- Languages ----------
     'pest-parser/pest.vim',
+    {
+        'kaarmu/typst.vim',
+        ft = 'typst',
+        lazy = false,
+    },
  
     ---------- TreeSitter ----------
     'nvim-treesitter/nvim-treesitter',
@@ -161,12 +166,12 @@ require'lazy'.setup({
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
 
-    {
-      "ray-x/lsp_signature.nvim",
-      event = "VeryLazy",
-      opts = {},
-      config = function(_, opts) require'lsp_signature'.setup(opts) end
-    },
+    -- {
+    --   "ray-x/lsp_signature.nvim",
+    --   event = "VeryLazy",
+    --   opts = {},
+    --   config = function(_, opts) require'lsp_signature'.setup(opts) end
+    -- },
 })
 
 -------------------- LSP General --------------------
@@ -175,6 +180,7 @@ local lsp = vim.lsp
 lsp.handlers["textDocument/publishDiagnostics"] = function() end -- disable diagnostics
 
 map('n', '<leader>r', lsp.buf.rename)
+map('n', '<leader>a', lsp.buf.code_action)
 map('n', 'K', lsp.buf.hover)
 map('n', 'gd', lsp.buf.definition)
 map('n', 'gD', lsp.buf.declaration)
@@ -193,10 +199,6 @@ cmp.setup {
         documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-        ['<leader>a'] = cmp.mapping(function()
-            vim.lsp.buf.code_action()
-        end, {'n'}),
-
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
