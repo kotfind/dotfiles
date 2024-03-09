@@ -3,11 +3,10 @@
 # Check if packages installed
 
 NEEDED_PACKAGES="fish \
-xorg-server xorg-xinit\
+xorg-server xorg-xinit \
 dmenu exa scrot xclip light pamixer \
 ttf-fira-code \
-xss-lock batsignal notification-daemon
-nvim-packer-git"
+xss-lock batsignal notification-daemon"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
 if ! [ $? -eq 0 ]; then
