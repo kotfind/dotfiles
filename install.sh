@@ -6,7 +6,8 @@ NEEDED_PACKAGES="fish \
 xorg-server xorg-xinit \
 dmenu exa scrot xclip light pamixer \
 ttf-fira-code \
-xss-lock batsignal notification-daemon"
+xss-lock batsignal notification-daemon \
+mold"
 
 pacman -Q $NEEDED_PACKAGES &> /dev/null
 if ! [ $? -eq 0 ]; then
