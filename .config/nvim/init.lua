@@ -89,21 +89,21 @@ require'lazy'.setup({
                 theme = 'auto',
             },
             sections = {
-              lualine_a = {'mode'},
-              lualine_b = {},
-              lualine_c = {{'filename', path = 1}},
-              lualine_x = {'encoding', 'filetype'},
-              lualine_y = {'progress'},
-              lualine_z = {'location'}
+                lualine_a = {'mode'},
+                lualine_b = {},
+                lualine_c = {{'filename', path = 1}},
+                lualine_x = {'encoding', 'filetype'},
+                lualine_y = {'progress'},
+                lualine_z = {'location'}
             },
-          inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = {{'filename', path = 1}},
-            lualine_x = {'location'},
-            lualine_y = {},
-            lualine_z = {}
-          },
+            inactive_sections = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = {{'filename', path = 1}},
+                lualine_x = {'location'},
+                lualine_y = {},
+                lualine_z = {}
+            },
         }
     },
 
@@ -177,7 +177,11 @@ require'lazy'.setup({
 -------------------- LSP General --------------------
 local lsp = vim.lsp
 
-lsp.handlers["textDocument/publishDiagnostics"] = function() end -- disable diagnostics
+ -- disable diagnostics
+lsp.handlers["textDocument/publishDiagnostics"] = function() end
+
+-- format on save
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 map('n', '<leader>r', lsp.buf.rename)
 map('n', '<leader>a', lsp.buf.code_action)
@@ -237,5 +241,15 @@ lspconfig.clangd.setup { capabilities = capabilities, }
 
 lspconfig.texlab.setup { capabilities = capabilities, }
 
-lspconfig.rust_analyzer.setup { capabilities = capabilities, }
+lspconfig.rust_analyzer.setup {
+    capabilities = capabilities,
+    cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
+    init_options = {
+        lspMux = {
+            version = "1",
+            method = "connect",
+            server = "rust-analyzer",
+        },
+    },
+}
 
