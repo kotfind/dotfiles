@@ -14,14 +14,19 @@ fish_add_path ~/.cargo/bin
 # Reset abbreviations
 set -g fish_user_abbreviations
 
-# Abbreviations
-alias l 'exa --group-directories-first --color=always -hl'
-alias L 'exa --group-directories-first --color=always -ahl'
+# Aliases
 alias p3 'python3'
 alias e 'exec'
 alias vim 'nvim'
 
-# Git Abbreviations
+# Exa aliases
+alias ls 'exa --group-directories-first --color=always --git-ignore'
+alias l  'exa --group-directories-first --color=always --git-ignore -hl'
+alias L  'exa --group-directories-first --color=always -ahl'
+alias t  'exa --group-directories-first --color=always --tree --git-ignore -ahl'
+alias T  'exa --group-directories-first --color=always --tree -ahl'
+
+# Git Aliases
 alias gs 'git status'
 alias ga 'git add'
 alias gc 'git commit'
@@ -34,14 +39,7 @@ alias gt 'git log --graph --all --oneline --decorate'
 alias gch 'git checkout'
 alias gb 'git branch'
 
-# Functions
-function fish_command_not_found
-    __fish_default_command_not_found_handler $argv
-end
-
-function fish_greeting
-end
-
+# Prompt
 function fish_prompt
     set -l last_status $status
 
@@ -79,7 +77,22 @@ function fish_right_prompt
     set_color normal
 end
 
-function mkcd
-    mkdir -p -- "$1" &&
-       cd -P -- "$1"
+# Disable greeting and not_found
+function fish_command_not_found
+    __fish_default_command_not_found_handler $argv
+end
+
+function fish_greeting
+end
+
+# Custom commands
+function mkcd -a dir
+    mkdir -p $dir &&
+    cd $dir
+end
+
+function tempcd
+    set dir (mktemp -d)
+    echo $dir
+    cd $dir
 end
