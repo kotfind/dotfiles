@@ -10,6 +10,8 @@ o.scrolloff = 5
 o.undofile = true
 
 o.tabstop = 4
+o.expandtab = true
+o.softtabstop = 4
 o.shiftwidth = 4
 
 o.number = true
@@ -18,10 +20,13 @@ o.cursorline = true
 
 o.wrap = false
 
-o.expandtab = true
-
 o.wildmenu = true
 o.wildmode = 'longest:full,full'
+
+-- nasm filetype
+vim.cmd [[au BufNewFile,BufRead,BufReadPost *.nasm set filetype=nasm]]
+
+vim.cmd [[highlight NormalFloat guibg=None]]
 
 -------------------- Keymaps --------------------
 vim.opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
@@ -54,22 +59,26 @@ map('n', '<F5>', ':vsp term://./run<CR>G')
 map('n', '<F6>', ':e term://./run<CR>G')
 map('n', '<F7>', ':!./run<CR>')
 
+-- global buffer yank/ paste
 map({'n', 'x'}, '<leader>p', '"+p')
 map({'n', 'x'}, '<leader>P', '"+P')
 map({'n', 'x'}, '<leader>y', '"+y')
 map('n', '<leader>yy', '"+yy')
 
+-- select pasted
+map('n', 'gp', "V'[']")
+
 -------------------- Plugins --------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -80,7 +89,7 @@ require'lazy'.setup({
             require 'remember'
         end
     },
- 
+
     ---------- Interface ----------
     {
         'nvim-lualine/lualine.nvim',
@@ -142,12 +151,14 @@ require'lazy'.setup({
             })
         end
     },
- 
+
     ---------- Bindings ----------
-    {'m4xshen/autoclose.nvim', opts = {}}, -- close brackets
-    'alvan/vim-closetag', -- close HTML tabgs
+    -- close brackets
+    {'m4xshen/autoclose.nvim', opts = {}}, 
+    -- close HTML tags
+    'alvan/vim-closetag',
     {'kylechui/nvim-surround', opts = {}},
- 
+
     ---------- Languages ----------
     'pest-parser/pest.vim',
     {
@@ -155,29 +166,42 @@ require'lazy'.setup({
         ft = 'typst',
         lazy = false,
     },
- 
+
     ---------- TreeSitter ----------
-    'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+                auto_install = true,
+                highlight = {
+                    enable = true,
+                },
+                indent = {
+                    enable = true
+                },
+            }
+        end
+    },
+
+    -- {
+    --     'nvim-treesitter/nvim-treesitter-context',
+    --     opts = {
+    --         enable = true,
+    --     },
+    -- },
 
     ---------- LSP ----------
     'neovim/nvim-lspconfig',
-
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
-
-    -- {
-    --   "ray-x/lsp_signature.nvim",
-    --   event = "VeryLazy",
-    --   opts = {},
-    --   config = function(_, opts) require'lsp_signature'.setup(opts) end
-    -- },
 })
 
 -------------------- LSP General --------------------
 local lsp = vim.lsp
 
- -- disable diagnostics
+-- disable diagnostics
 lsp.handlers["textDocument/publishDiagnostics"] = function() end
 
 -- format on save
@@ -191,6 +215,10 @@ map('n', 'gD', lsp.buf.declaration)
 
 local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = false -- disable snippets
+
+function on_attach(client, bufnr)
+    client.server_capabilities.semanticTokensProvider = nil
+end
 
 local lspconfig = require 'lspconfig'
 
@@ -231,18 +259,20 @@ cmp.setup {
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'buffer' },
+        { name = 'nvim-cmp-ts-tag-close' },
     })
 }
 
 -------------------- LSP Servers --------------------
-lspconfig.pyright.setup { capabilities = capabilities, }
+lspconfig.pyright.setup { capabilities = capabilities, on_attach = on_attach, }
 
-lspconfig.clangd.setup { capabilities = capabilities, }
+lspconfig.clangd.setup { capabilities = capabilities, on_attach = on_attach, }
 
-lspconfig.texlab.setup { capabilities = capabilities, }
+lspconfig.texlab.setup { capabilities = capabilities, on_attach = on_attach, }
 
 lspconfig.rust_analyzer.setup {
     capabilities = capabilities,
+    on_attach = on_attach,
     cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
     init_options = {
         lspMux = {
@@ -252,4 +282,3 @@ lspconfig.rust_analyzer.setup {
         },
     },
 }
-
