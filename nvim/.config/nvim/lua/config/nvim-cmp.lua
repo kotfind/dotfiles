@@ -3,7 +3,7 @@ local cmp = require 'cmp'
 cmp.setup {
     snippet = {},
     mapping = cmp.mapping.preset.insert {
-        ['<CR>'] = cmp.mapping.confirm({select = true}),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
 
         ['<Tab>'] = cmp.mapping(function(fallback)
             local col = vim.fn.col('.') - 1
@@ -15,7 +15,7 @@ cmp.setup {
             else
                 cmp.complete()
             end
-        end, {'i', 's'}),
+        end, { 'i', 's' }),
 
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -23,7 +23,7 @@ cmp.setup {
             else
                 fallback()
             end
-        end, {'i', 's'}),
+        end, { 'i', 's' }),
     },
     formatting = {
         fields = { 'abbr', 'menu' },
@@ -42,5 +42,6 @@ cmp.setup {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = 'nvim-cmp-ts-tag-close' },
     })
 }

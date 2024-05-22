@@ -18,55 +18,34 @@ require 'lazy'.setup {
     -- Lualine
     {
         'nvim-lualine/lualine.nvim',
-        config = function ()
+        config = function()
             require 'config.lualine'
         end
     },
 
     -- Pairs
-    {
-        'echasnovski/mini.pairs',
-        opts = {},
-	},
+    { 'm4xshen/autoclose.nvim', opts = {} },
+    { 'windwp/nvim-ts-autotag', opts = {} },
+    { 'kylechui/nvim-surround', opts = {} },
 
+    -- Auto-completion engine
     {
-        'windwp/nvim-ts-autotag',
-        opts = {},
-    },
-
-    {
-        'echasnovski/mini.surround',
-        opts = {
-            mappings = {
-                add = 'gsa',
-                delete = 'gsd',
-                find = 'gsf',
-                find_left = 'gsF',
-                highlight = 'gsh',
-                replace = 'gsr',
-                update_n_lines = 'gsn',
-            },
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
         },
+        config = function()
+            require 'config.nvim-cmp'
+        end,
     },
-
-	-- Auto-completion engine
-	{
-		'hrsh7th/nvim-cmp',
-		dependencies = {
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-buffer',
-			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-cmdline',
-		},
-		config = function()
-			require 'config.nvim-cmp'
-		end,
-	},
 
     -- LSP
-	'williamboman/mason.nvim',
-	'williamboman/mason-lspconfig.nvim',
-	'neovim/nvim-lspconfig',
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig',
 
     -- Treesitter
     {
@@ -91,34 +70,13 @@ require 'lazy'.setup {
         },
     },
 
-    -- Motions
-    {
-        'ggandor/flit.nvim',
-        dependencies = {
-            'ggandor/leap.nvim',
-            'tpope/vim-repeat',
-        },
-        opts = {},
-    },
-
-    {
-        'ggandor/leap.nvim',
-        dependencies = {
-            'tpope/vim-repeat',
-        },
-        config = function ()
-            vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
-            vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
-        end,
-    },
-
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
         },
-        config = function ()
+        config = function()
             require 'config.telescope'
         end
     }
