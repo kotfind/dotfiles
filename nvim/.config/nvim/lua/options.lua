@@ -37,3 +37,12 @@ vim.opt.undofile = true
 -- Wrap
 vim.opt.wrap = true
 vim.opt.linebreak = true
+
+-- Nasm filetype
+vim.cmd [[au BufNewFile,BufRead,BufReadPost *.nasm set filetype=nasm]]
+
+-- Preserve cursor position
+vim.api.nvim_create_autocmd({'BufWinEnter'}, {
+    pattern = '*',
+    command = [[ silent! normal! g`"zv' ]]
+})
