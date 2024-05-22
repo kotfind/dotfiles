@@ -77,6 +77,13 @@ function fish_right_prompt
     set_color normal
 end
 
+# Start X at login
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec startx -- -keeptty
+    end
+end
+
 # Disable greeting and not_found
 function fish_command_not_found
     __fish_default_command_not_found_handler $argv
