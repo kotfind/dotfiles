@@ -28,6 +28,7 @@ require 'nvim-treesitter.configs'.setup {
         'yaml',
         'rust',
         'nasm',
+        'typst',
     },
     incremental_selection = {
         enable = true,

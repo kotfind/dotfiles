@@ -58,7 +58,7 @@ require 'lazy'.setup {
 
     {
         'nvim-treesitter/nvim-treesitter-context',
-        opts = {},
+        -- opts = {},
     },
 
     -- Higlighth TODO, FIX, etc
@@ -79,5 +79,8 @@ require 'lazy'.setup {
         config = function()
             require 'config.telescope'
         end
-    }
+    },
+
+    -- Pest
+    'pest-parser/pest.vim'
 }

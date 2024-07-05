@@ -8,6 +8,9 @@ require 'mason-lspconfig'.setup {
         'clangd',
         'rust_analyzer',
         'lua_ls',
+        'cssls',
+        'typst_lsp',
+        'pest_ls'
     },
 }
 
@@ -45,13 +48,17 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>R', vim.lsp.buf.references, bufopts)
 end
 
+local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
+
 -- Disable disagnostics
 vim.diagnostic.disable()
 
 -- Format on save
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     callback = function()
-        vim.lsp.buf.format()
+        if (vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "c") then
+            vim.lsp.buf.format()
+        end
     end
 })
 
@@ -61,14 +68,17 @@ local lspconfig = require 'lspconfig'
 require 'mason-lspconfig'.setup_handlers {
     function(server_name)
         lspconfig[server_name].setup {
-            on_attach = on_attach
+            on_attach = on_attach,
+            capabilities = capabilities,
         }
     end,
 
     ['rust_analyzer'] = function()
         lspconfig.rust_analyzer.setup {
             on_attach = on_attach,
+            capabilities = capabilities,
             cmd = vim.lsp.rpc.connect('127.0.0.1', 27631),
+            args = { '--all-targets' },
             init_options = {
                 lspMux = {
                     version = '1',
@@ -82,6 +92,7 @@ require 'mason-lspconfig'.setup_handlers {
     ['lua_ls'] = function()
         lspconfig.lua_ls.setup {
             on_attach = on_attach,
+            capabilities = capabilities,
             settings = {
                 Lua = {
                     diagnostics = {

@@ -23,7 +23,7 @@ alias vim 'nvim'
 alias ls 'exa --group-directories-first --color=always --git-ignore'
 alias l  'exa --group-directories-first --color=always --git-ignore -hl'
 alias L  'exa --group-directories-first --color=always -ahl'
-alias t  'exa --group-directories-first --color=always --tree --git-ignore -ahl'
+alias t  'exa --group-directories-first --color=always --tree --git-ignore -hl'
 alias T  'exa --group-directories-first --color=always --tree -ahl'
 
 # Git Aliases

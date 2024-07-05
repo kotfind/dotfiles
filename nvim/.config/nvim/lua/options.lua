@@ -38,8 +38,9 @@ vim.opt.undofile = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 
--- Nasm filetype
+-- Filetypes
 vim.cmd [[au BufNewFile,BufRead,BufReadPost *.nasm set filetype=nasm]]
+vim.cmd [[au BufNewFile,BufRead,BufReadPost *.pest set filetype=pest]]
 
 -- Preserve cursor position
 vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
