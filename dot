@@ -91,7 +91,7 @@ REQUIRED_PACKAGES=(
     fish ripgrep fd git
     ttf-fira-code
     mold
-    nvim npm
+    nvim npm silicon
 )
 SUCKLESS_DIR="$HOME/suckless"
 SUCKLESS_TOOLS=(dwm slock slstatus st)
@@ -108,7 +108,7 @@ install() {
     # Install packages
     if [ "$skip_package" = false ]; then
         bold "Installing packages.."
-        yay -S --needed $REQUIRED_PACKAGES
+        yay -S --needed ${REQUIRED_PACKAGES[*]}
     fi
 
     # Symlink dotfiles
