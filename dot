@@ -1,0 +1,181 @@
+#!/bin/bash
+
+set -e
+
+EXEC_NAME="$0"
+
+BOLD="$(tput bold)"
+RESET="$(tput sgr0)"
+
+bold() {
+    echo "${BOLD}$1${RESET}"
+}
+
+usage() {
+cat << END 1>&2
+$(bold "Usage:")
+    $(bold "$EXEC_NAME") -h
+    $(bold "$EXEC_NAME") [MODE] [OPTIONS]
+
+$(bold "Modes:")
+    $(bold "help")       Print this message.
+    $(bold "install")    Install dotfiles.
+    $(bold "clean")      Clean dotfiles.
+
+$(bold "Options:")
+    $(bold "-h")    Print this message.
+    $(bold "-p")    Skip package step (for install mode only).
+    $(bold "-s")    Skip suckless tools step.
+    $(bold "-l")    Skip link step.
+END
+}
+
+mode="$1"
+case "$1" in
+    "help")
+        usage
+        exit 0
+        ;;
+
+    "install")
+        mode="install"
+        ;;
+
+    "clean")
+        mode="clean"
+        ;;
+
+    *)
+        usage
+        exit 0
+        ;;
+esac
+shift 1
+
+skip_package=false
+skip_suckless=false
+skip_link=false
+
+while getopts ":hpsl" arg; do
+    case "$arg" in
+        "h")
+            usage
+            exit 0
+            ;;
+
+        "p")
+            skip_package=true
+            ;;
+
+        "s")
+            skip_suckless=true
+            ;;
+
+        "l")
+            skip_link=true
+            ;;
+
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+REQUIRED_PACKAGES=(
+    stow
+    xorg-server xorg-xinit
+    dmenu exa scrot xclip light pamixer
+    xss-lock batsignal notification-daemon
+    fish ripgrep fd git
+    ttf-fira-code
+    mold
+    nvim npm
+)
+SUCKLESS_DIR="$HOME/suckless"
+SUCKLESS_TOOLS=(dwm slock slstatus st)
+
+pushd() {
+    command pushd "$@" > /dev/null
+}
+
+popd() {
+    command popd "$@" > /dev/null
+}
+
+install() {
+    # Install packages
+    if [ "$skip_package" = false ]; then
+        bold "Installing packages.."
+        yay -S --needed $REQUIRED_PACKAGES
+    fi
+
+    # Symlink dotfiles
+    if [ "$skip_link" = false ]; then
+        bold "Creating symlinks..."
+        fd -t d -d 1 --strip-cwd-prefix=always -x stow
+    fi
+
+    # Clone suckless config repos
+    if [ "$skip_suckless" = false ]; then
+        bold "Clonning suckless tools..."
+        mkdir -p "$SUCKLESS_DIR"
+        pushd "$SUCKLESS_DIR"
+        for tool in "${SUCKLESS_TOOLS[@]}"; do
+            if [ ! -d "$tool" ]; then
+                git clone "git@github.com:kotfind/${tool}-config.git" "$tool"
+            fi
+
+            pushd "$tool"
+            make && sudo make install
+            popd
+        done
+        popd
+    fi
+
+    bold "Installation successful."
+}
+
+clean() {
+    if [ "$skip_suckless" = false ]; then
+        bold "Checking suckless tools..."
+        if [ -d "$SUCKLESS_DIR" ]; then
+            pushd "$SUCKLESS_DIR"
+            for tool in "${SUCKLESS_TOOLS[@]}"; do
+                pushd "$tool"
+                if [ ! -z "$(git status --porcelain --untracked-files=no)" ]; then
+                    bold "error: directory $(pwd) has unstaged changes" 1>&2
+                    exit 1
+                fi
+                popd
+            done
+            popd
+        fi
+
+        bold "Removing suckless tools..."
+        rm -rf "$SUCKLESS_DIR"
+    fi
+
+    if [ "$skip_link" = false ]; then
+        bold "Removing symlinks..."
+        fd -t d -d 1 --strip-cwd-prefix=always -x stow -D
+    fi
+
+    bold "Cleaning successful."
+}
+
+case "$mode" in
+    "install")
+        install
+        ;;
+
+    "clean")
+        clean
+        ;;
+
+    *)
+        bold "error: unreachable!!!" 1>&2
+        exit 1
+        ;;
+esac
