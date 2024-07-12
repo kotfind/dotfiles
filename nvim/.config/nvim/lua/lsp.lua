@@ -10,7 +10,8 @@ require 'mason-lspconfig'.setup {
         'lua_ls',
         'cssls',
         'typst_lsp',
-        'pest_ls'
+        'pest_ls',
+        'bashls',
     },
 }
 
