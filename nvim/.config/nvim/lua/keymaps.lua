@@ -58,6 +58,3 @@ vim.keymap.set('n', '<leader>yy', '"+yy', opts)
 
 -- Select pasted
 vim.keymap.set('n', 'gp', "V'[']", opts)
-
--- Toggle theme
-vim.keymap.set('n', '<leader>t', ':CyberdreamToggleMode<CR>', opts)
