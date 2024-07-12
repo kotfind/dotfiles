@@ -21,8 +21,6 @@ local function on_attach(client, bufnr)
     bmap('n', '<leader>r', ':IncRename')
     bmap('n', '<leader>a', vim.lsp.buf.code_action)
     bmap('n', '<leader>R', vim.lsp.buf.references)
-
-    bmap('n', '<leader>l', require 'lsp_lines'.toggle)
 end
 
 local function capabilities()
@@ -31,13 +29,22 @@ end
 
 local function setup_diagnostics()
     vim.diagnostic.config {
+        -- disable built-in diagnostics display
         virtual_text = false,
+
+        -- disable lsp_lines at start
+        virtual_lines = false,
     }
 
     vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         underline = false,
         severity_sort = true,
     })
+
+    local lsp_lines = require 'lsp_lines'
+    lsp_lines.setup {}
+
+    map('n', '<leader>l', lsp_lines.toggle)
 end
 
 local function setup_lsp()
