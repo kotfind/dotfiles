@@ -2,7 +2,7 @@ return {
     {
         'scottmckendry/cyberdream.nvim',
         config = function()
-            require 'cyberdream'.setup{
+            require 'cyberdream'.setup {
                 italic_comments = true,
                 borderless_telescope = false,
                 theme = {
@@ -14,8 +14,8 @@ return {
 
             vim.cmd [[ colorscheme cyberdream ]]
 
-            -- Toggle theme
-            vim.keymap.set('n', '<leader>t', ':CyberdreamToggleMode<CR>', opts)
+            -- toggle theme
+            Map('n', '<leader>T', ':CyberdreamToggleMode<CR>')
         end
     },
 
@@ -27,4 +27,3 @@ return {
         end
     },
 }
-
