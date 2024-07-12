@@ -46,11 +46,6 @@ Map('i', 'JK', '<ESC>')
 -- Terminal -> Normal
 Map('t', '<ESC><ESC>', '<C-\\><C-N>')
 
--- Run ./run
-Map('n', '<F5>', ':vsp term://./run<CR>')
-Map('n', '<F6>', ':e term://./run<CR>')
-Map('n', '<F7>', ':!./run<CR>')
-
 -- Global buffer yank/ paste
 Map({ 'n', 'x' }, '<leader>p', '"+p')
 Map({ 'n', 'x' }, '<leader>P', '"+P')
