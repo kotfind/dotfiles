@@ -27,7 +27,7 @@ alias t  'exa --group-directories-first --color=always --tree --git-ignore -hl'
 alias T  'exa --group-directories-first --color=always --tree -ahl'
 
 # Git Aliases
-alias gs 'git status'
+alias gs 'git status --short'
 alias ga 'git add'
 alias gc 'git commit'
 alias gca 'git commit --amend'
