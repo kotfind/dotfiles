@@ -1,26 +1,29 @@
 local function setup_silicon()
     local silicon = require 'nvim-silicon'
     silicon.setup {
-        theme = 'OneHalfDark',
-        pad_horiz = 0,
-        pad_vert = 0,
-        no_round_corner = true,
-        no_window_controls = true,
+        -- To preven conflicts with ~/silicon/.config/silicon
+        disable_defaults = true,
+
         gobble = true,
         to_clipboard = false,
-        line_offset = function()
-            local mode = vim.api.nvim_get_mode()['mode']
-            if mode == 'n' then
-                -- prints all file, no offset
-                return 1
-            elseif mode == 'x' then
-                -- prints range, first selected line offset
-                return vim.fn.getpos('v')[1]
-            end
+
+        language = function()
+            return vim.bo.filetype
         end,
+
         output = function()
             return os.date("/tmp/TmpScreenshots/silicon-%s.png")
-        end
+        end,
+
+        line_offset = function()
+            local mode = vim.api.nvim_get_mode()['mode']
+
+            if mode == 'n' then
+                return 1
+            else
+                return vim.fn.getpos('v')[1] + 1
+            end
+        end,
     }
 
     Map('n', '<leader>s', silicon.shoot)
