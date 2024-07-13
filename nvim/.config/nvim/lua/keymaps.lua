@@ -5,6 +5,10 @@ function Map(modes, key, func)
     })
 end
 
+function Feed(keys)
+    vim.fn.feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), true)
+end
+
 -- Langmap
 vim.opt.langmap =
 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
