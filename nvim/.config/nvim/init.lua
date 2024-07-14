@@ -1,6 +1,7 @@
 -- Require some files
 require 'keymaps'
 require 'options'
+require 'silicon'
 
 -- Init lazy
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
