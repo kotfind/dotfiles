@@ -1,18 +1,19 @@
 local function setup_cyberdream()
     require 'cyberdream'.setup {
         italic_comments = true,
-        borderless_telescope = false,
+        borderless_telescope = true,
         theme = {
-            highlights = {
-                -- TreesitterContextBottom = { underline = true },
-            },
+            variant = 'auto',
+            overrides = function(colors)
+                return {
+                    Comment = { fg = colors.magenta, bg = "NONE", italic = true },
+                    CursorLine = { fg = "NONE", bg = colors.bgAlt },
+                }
+            end,
         },
     }
 
     vim.cmd [[ colorscheme cyberdream ]]
-
-    -- toggle theme
-    Map('n', '<leader>T', ':CyberdreamToggleMode<CR>')
 end
 
 local function setup_lualine()
@@ -64,6 +65,14 @@ return {
     },
 
     {
+        'nvim-lualine/lualine.nvim',
+        config = setup_lualine,
+        dependencies = {
+            'scottmckendry/cyberdream.nvim',
+        },
+    },
+
+    {
         'mhinz/vim-signify',
         config = function()
             vim.o.signcolumn = 'yes:1'
@@ -72,10 +81,7 @@ return {
     },
 
     {
-        'nvim-lualine/lualine.nvim',
-        config = setup_lualine,
-        dependencies = {
-            'scottmckendry/cyberdream.nvim',
-        },
-    }
+        'NvChad/nvim-colorizer.lua',
+        opts = {},
+    },
 }
