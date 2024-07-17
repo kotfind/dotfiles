@@ -4,7 +4,7 @@ local function on_attach(client, bufnr)
 
     -- Buffer Mappings
     local function bmap(modes, key, func)
-        vim.keymap.set(modes, key, func, {
+        Map(modes, key, func, {
             noremap = true,
             silent = true,
             buffer = bufnr

@@ -1,8 +1,12 @@
-function Map(modes, key, func)
-    vim.keymap.set(modes, key, func, {
-        noremap = true,
-        silent = true,
-    })
+function Map(modes, key, func, opts)
+    if opts == nil then
+        opts = {
+            noremap = true,
+            silent = true,
+        }
+    end
+
+    vim.keymap.set(modes, key, func, opts)
 end
 
 function Feed(keys)
