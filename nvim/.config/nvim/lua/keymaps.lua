@@ -43,16 +43,16 @@ Map({ 'n', 'x' }, 'g^', '^')
 Map({ 'n', 'x' }, 'g$', '$')
 
 -- No highlight
-Map('n', '<leader><ESC>', ':nohlsearch<CR>')
+Map('n', '<leader><esc>', ':nohlsearch<CR>')
 
--- Escape
-Map('i', 'jk', '<ESC>')
-Map('i', 'Jk', '<ESC>')
-Map('i', 'jK', '<ESC>')
-Map('i', 'JK', '<ESC>')
+-- escape
+Map('i', 'jk', '<esc>')
+Map('i', 'Jk', '<esc>')
+Map('i', 'jK', '<esc>')
+Map('i', 'JK', '<esc>')
 
 -- Terminal -> Normal
-Map('t', '<ESC><ESC>', '<C-\\><C-N>')
+Map('t', '<esc><esc>', '<C-\\><C-N>')
 
 -- Global buffer yank/ paste
 Map({ 'n', 'x' }, '<leader>p', '"+p')

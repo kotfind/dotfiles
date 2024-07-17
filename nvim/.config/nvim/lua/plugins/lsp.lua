@@ -18,9 +18,9 @@ local function on_attach(client, bufnr)
     bmap('n', 'K', vim.lsp.buf.hover)
     bmap('n', 'L', vim.lsp.buf.signature_help)
 
-    bmap('n', '<leader>r', ':IncRename ')
-    bmap('n', '<leader>a', vim.lsp.buf.code_action)
-    bmap('n', '<leader>R', vim.lsp.buf.references)
+    bmap('n', '<leader>lr', vim.lsp.buf.rename)
+    bmap('n', '<leader>la', vim.lsp.buf.code_action)
+    bmap('n', '<leader>lR', vim.lsp.buf.references)
 end
 
 local function capabilities()
@@ -44,15 +44,15 @@ local function setup_diagnostics()
     local lsp_lines = require 'lsp_lines'
     lsp_lines.setup {}
 
-    Map('n', '<leader>l', lsp_lines.toggle)
+    Map('n', '<leader>tl', lsp_lines.toggle)
 end
 
 local function setup_lsp()
     -- Mappings
     Map('n', '[d', vim.diagnostic.goto_prev)
     Map('n', ']d', vim.diagnostic.goto_next)
-    Map('n', '<leader>d', vim.diagnostic.open_float)
-    Map('n', '<leader>D', vim.diagnostic.setloclist)
+    Map('n', '<leader>ld', vim.diagnostic.open_float)
+    Map('n', '<leader>lD', vim.diagnostic.setloclist)
 
     -- Format on save
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
@@ -157,15 +157,5 @@ return {
     {
         'stevearc/dressing.nvim',
         opts = {},
-    },
-
-    {
-        'smjonas/inc-rename.nvim',
-        opts = {
-            input_buffer_type = 'dressing',
-        },
-        dependencies = {
-            'stevearc/dressing.nvim',
-        }
     },
 }

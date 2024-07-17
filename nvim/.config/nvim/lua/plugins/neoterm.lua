@@ -1,5 +1,5 @@
 local function setup_neoterm()
-    Map('n', '<leader>t', function() vim.fn.execute(vim.v.count .. ' Ttoggle') end)
+    Map('n', '<leader>tt', function() vim.fn.execute(vim.v.count .. ' Ttoggle') end)
 
     vim.g.neoterm_default_mod = 'vert'
     Map('i', '<C-i>', '<C-o><Plug>(neoterm-repl-send-line)')
