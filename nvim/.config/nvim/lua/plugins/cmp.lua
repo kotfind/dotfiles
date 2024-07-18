@@ -51,19 +51,37 @@ local function setup_normal()
             format = function(entry, vim_item)
                 vim_item.menu = ({
                     nvim_lsp = '[Lsp]',
-                    buffer = '[File]',
+                    buffer = '[Files]',
                     path = '[Path]',
+                    calc = '[Calc]',
+                    luasnip = '[Snip]',
+                    spell = '[Spell]',
                 })[entry.source.name]
                 return vim_item
             end,
         },
 
         sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
-            { name = 'buffer' },
-            { name = 'path' },
-            { name = 'nvim-cmp-ts-tag-close' },
+            { name = 'calc' },
             { name = 'luasnip' },
+            { name = 'nvim_lsp' },
+            {
+                name = 'buffer',
+                option = {
+                    get_bufnrs = function()
+                        return vim.api.nvim_list_bufs()
+                    end
+                }
+            },
+            { name = 'path' },
+            {
+                name = 'spell',
+                option = {
+                    enable_in_context = function(params)
+                        return require 'cmp.config.context'.in_treesitter_capture('spell')
+                    end,
+                }
+            },
         }),
     }
 end
@@ -73,14 +91,31 @@ local function setup_cmdline()
 
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
+
+        formatting = {
+            fields = { 'abbr', 'menu' },
+
+            format = function(entry, vim_item)
+                vim_item.menu = ({
+                    buffer = '[Files]',
+                    path = '[Path]',
+                    cmdline = '[Cmd]',
+                })[entry.source.name]
+                return vim_item
+            end,
+        },
+
         sources = cmp.config.sources({
             { name = 'path' },
             {
-                name = 'cmdline',
+                name = 'buffer',
                 option = {
-                    ignore_cmds = { 'Man', '!' }
+                    get_bufnrs = function()
+                        return vim.api.nvim_list_bufs()
+                    end
                 }
             },
+            { name = 'cmdline', },
         })
     })
 end
@@ -90,8 +125,27 @@ local function setup_searchline()
 
     cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
+
+        formatting = {
+            fields = { 'abbr', 'menu' },
+
+            format = function(entry, vim_item)
+                vim_item.menu = ({
+                    buffer = '[Files]',
+                })[entry.source.name]
+                return vim_item
+            end,
+        },
+
         sources = {
-            { name = 'buffer' },
+            {
+                name = 'buffer',
+                option = {
+                    get_bufnrs = function()
+                        return vim.api.nvim_list_bufs()
+                    end
+                }
+            },
         },
     })
 end
@@ -111,13 +165,9 @@ return {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
-            'buschco/nvim-cmp-ts-tag-close'
+            'hrsh7th/cmp-calc',
+            'f3fora/cmp-spell',
         },
-    },
-
-    {
-        'buschco/nvim-cmp-ts-tag-close',
-        opts = {}
     },
 
     {

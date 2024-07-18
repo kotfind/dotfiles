@@ -42,3 +42,7 @@ vim.opt.linebreak = true
 vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
     command = [[ silent! normal! g`"zv' ]]
 })
+
+-- Languages
+vim.opt.spell = true
+vim.opt.spelllang = { 'en', 'ru' }

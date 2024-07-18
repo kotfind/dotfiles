@@ -40,6 +40,7 @@ return {
     -- Surround with braces
     { 'kylechui/nvim-surround', opts = {} },
     { 'm4xshen/autoclose.nvim', opts = {} },
+    { 'windwp/nvim-ts-autotag', opts = {} },
 
     -- Substitute
     {
