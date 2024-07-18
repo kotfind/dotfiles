@@ -1,37 +1,40 @@
+local o = vim.opt
+
 -- Mouse
-vim.opt.mouse = 'a'
+o.mouse = 'a'
 
 -- Tab
-vim.opt.tabstop = 4
-vim.opt.expandtab = true
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+o.tabstop = 4
+o.expandtab = true
+o.softtabstop = 4
+o.shiftwidth = 4
 
 -- UI
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
+o.number = true
+o.relativenumber = true
+o.cursorline = true
 
-vim.opt.termguicolors = true
-vim.opt.showmode = false
+o.termguicolors = true
+o.showmode = false
 
-vim.opt.scrolloff = 5
+o.scrolloff = 5
 
 -- Split
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+o.splitbelow = true
+o.splitright = true
 
 -- Search
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
-vim.opt.ignorecase = true
+o.hlsearch = true
+o.incsearch = true
+o.ignorecase = true
 
 -- Undo file
-vim.opt.undofile = true
+o.undofile = true
 
 -- Wrap
-vim.opt.wrap = true
-vim.opt.linebreak = true
+o.wrap = true
+o.linebreak = true
+o.breakindent = true
 
 -- Preserve cursor position
 vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
@@ -39,5 +42,5 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
 })
 
 -- Languages
-vim.opt.spell = true
-vim.opt.spelllang = { 'en', 'ru' }
+o.spell = true
+o.spelllang = { 'en', 'ru' }
