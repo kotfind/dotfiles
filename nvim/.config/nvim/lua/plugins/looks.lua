@@ -6,10 +6,13 @@ local function setup_cyberdream()
             variant = 'auto',
             overrides = function(colors)
                 return {
-                    Comment = { fg = colors.magenta, bg = "NONE", italic = true },
-                    CursorLine = { fg = "NONE", bg = colors.bgAlt },
-                    EyelinerPrimary = { fg = "white", bg = colors.magenta },
-                    EyelinerSecondary = { fg = "white", bg = colors.cyan },
+                    CursorLine = { fg = 'NONE', bg = colors.bgAlt },
+
+                    Comment = { fg = colors.magenta, bg = 'NONE', italic = true },
+                    ['@note.comment'] = { fg = colors.cyan, bold = true },
+
+                    EyelinerPrimary = { fg = 'white', bg = colors.magenta },
+                    EyelinerSecondary = { fg = 'white', bg = colors.cyan },
                 }
             end,
         },

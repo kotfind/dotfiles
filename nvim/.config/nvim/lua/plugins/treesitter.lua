@@ -24,6 +24,7 @@ local function setup_treesitter()
             'typst',
             'toml',
             'gitcommit',
+            'comment',
         },
 
         auto_install = true,
