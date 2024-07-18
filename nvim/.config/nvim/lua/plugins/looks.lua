@@ -8,6 +8,8 @@ local function setup_cyberdream()
                 return {
                     Comment = { fg = colors.magenta, bg = "NONE", italic = true },
                     CursorLine = { fg = "NONE", bg = colors.bgAlt },
+                    EyelinerPrimary = { fg = "white", bg = colors.magenta },
+                    EyelinerSecondary = { fg = "white", bg = colors.cyan },
                 }
             end,
         },
@@ -83,5 +85,12 @@ return {
     {
         'NvChad/nvim-colorizer.lua',
         opts = {},
+    },
+
+    {
+        'jinh0/eyeliner.nvim',
+        opts = {
+            highlight_on_key = true,
+        },
     },
 }
