@@ -1,8 +1,17 @@
--- Common options
-local opts = {
-    noremap = true,
-    silent = true,
-}
+function Map(modes, key, func, opts)
+    if opts == nil then
+        opts = {
+            noremap = true,
+            silent = true,
+        }
+    end
+
+    vim.keymap.set(modes, key, func, opts)
+end
+
+function Feed(keys)
+    vim.fn.feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), true)
+end
 
 -- Langmap
 vim.opt.langmap =
@@ -10,54 +19,46 @@ vim.opt.langmap =
 
 -- Set leader
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<Space>', '')
+Map('n', '<space>', '')
 
 -- Move between windows
-vim.keymap.set({ 'n', 't' }, '<C-h>', '<C-w>h', opts)
-vim.keymap.set({ 'n', 't' }, '<C-j>', '<C-w>j', opts)
-vim.keymap.set({ 'n', 't' }, '<C-k>', '<C-w>k', opts)
-vim.keymap.set({ 'n', 't' }, '<C-l>', '<C-w>l', opts)
+Map({ 'n', 't' }, '<C-h>', '<C-w>h')
+Map({ 'n', 't' }, '<C-j>', '<C-w>j')
+Map({ 'n', 't' }, '<C-k>', '<C-w>k')
+Map({ 'n', 't' }, '<C-l>', '<C-w>l')
 
 -- Reselect on shift
-vim.keymap.set('v', '<', '<gv', opts)
-vim.keymap.set('v', '>', '>gv', opts)
+Map('v', '<', '<gv')
+Map('v', '>', '>gv')
 
 -- Move on wrapped lines
-vim.keymap.set({ 'n', 'x' }, 'j', 'gj', opts)
-vim.keymap.set({ 'n', 'x' }, 'k', 'gk', opts)
-vim.keymap.set({ 'n', 'x' }, '^', 'g^', opts)
-vim.keymap.set({ 'n', 'x' }, '$', 'g$', opts)
+Map({ 'n', 'x' }, 'j', 'gj')
+Map({ 'n', 'x' }, 'k', 'gk')
+Map({ 'n', 'x' }, '^', 'g^')
+Map({ 'n', 'x' }, '$', 'g$')
 
-vim.keymap.set({ 'n', 'x' }, 'gj', 'j', opts)
-vim.keymap.set({ 'n', 'x' }, 'gk', 'k', opts)
-vim.keymap.set({ 'n', 'x' }, 'g^', '^', opts)
-vim.keymap.set({ 'n', 'x' }, 'g$', '$', opts)
+Map({ 'n', 'x' }, 'gj', 'j')
+Map({ 'n', 'x' }, 'gk', 'k')
+Map({ 'n', 'x' }, 'g^', '^')
+Map({ 'n', 'x' }, 'g$', '$')
 
 -- No highlight
-vim.keymap.set('n', '<leader><ESC>', ':nohlsearch<CR>', opts)
+Map('n', '<leader><esc>', ':nohlsearch<CR>')
 
--- Escape
-vim.keymap.set('i', 'jk', '<ESC>', opts)
-vim.keymap.set('i', 'Jk', '<ESC>', opts)
-vim.keymap.set('i', 'jK', '<ESC>', opts)
-vim.keymap.set('i', 'JK', '<ESC>', opts)
+-- escape
+Map('i', 'jk', '<esc>')
+Map('i', 'Jk', '<esc>')
+Map('i', 'jK', '<esc>')
+Map('i', 'JK', '<esc>')
 
 -- Terminal -> Normal
-vim.keymap.set('t', '<ESC><ESC>', '<C-\\><C-N>', opts)
-
--- Run ./run
-vim.keymap.set('n', '<F5>', ':vsp term://./run<CR>', opts)
-vim.keymap.set('n', '<F6>', ':e term://./run<CR>', opts)
-vim.keymap.set('n', '<F7>', ':!./run<CR>', opts)
+Map('t', '<esc><esc>', '<C-\\><C-N>')
 
 -- Global buffer yank/ paste
-vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p', opts)
-vim.keymap.set({ 'n', 'x' }, '<leader>P', '"+P', opts)
-vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', opts)
-vim.keymap.set('n', '<leader>yy', '"+yy', opts)
+Map({ 'n', 'x' }, '<leader>p', '"+p')
+Map({ 'n', 'x' }, '<leader>P', '"+P')
+Map({ 'n', 'x' }, '<leader>y', '"+y')
+Map('n', '<leader>yy', '"+yy')
 
 -- Select pasted
-vim.keymap.set('n', 'gp', "V'[']", opts)
-
--- Toggle theme
-vim.keymap.set('n', '<leader>t', ':CyberdreamToggleMode<CR>', opts)
+Map('n', 'gp', "V'[']")

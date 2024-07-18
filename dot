@@ -4,12 +4,18 @@ set -e
 
 EXEC_NAME="$0"
 
-BOLD="$(tput bold)"
-RESET="$(tput sgr0)"
-
 bold() {
-    echo "${BOLD}$1${RESET}"
+    echo "$(tput bold)$1$(tput sgr0)"
 }
+
+die() {
+    tput bold setaf 1
+    echo "error: $1"
+    echo ""
+    tput sgr0
+    usage
+    exit 1
+} >&2
 
 usage() {
 cat << END 1>&2
@@ -24,9 +30,10 @@ $(bold "Modes:")
 
 $(bold "Options:")
     $(bold "-h")    Print this message.
-    $(bold "-p")    Skip package step (for install mode only).
-    $(bold "-s")    Skip suckless tools step.
-    $(bold "-l")    Skip link step.
+    $(bold "-p")    Run package step (for install mode only).
+    $(bold "-s")    Run suckless tools step.
+    $(bold "-l")    Run link step.
+    $(bold "-a")    Run all steps. Same as -psl.
 END
 }
 
@@ -45,18 +52,23 @@ case "$1" in
         mode="clean"
         ;;
 
+    "")
+        die "no mode provided"
+        exit 0
+        ;;
+
     *)
-        usage
+        die "mode $1 undefined"
         exit 0
         ;;
 esac
 shift 1
 
-skip_package=false
-skip_suckless=false
-skip_link=false
+run_packages=false
+run_suckless=false
+run_links=false
 
-while getopts ":hpsl" arg; do
+while getopts ":hpsls" arg; do
     case "$arg" in
         "h")
             usage
@@ -64,24 +76,34 @@ while getopts ":hpsl" arg; do
             ;;
 
         "p")
-            skip_package=true
+            run_packages=true
             ;;
 
         "s")
-            skip_suckless=true
+            run_suckless=true
             ;;
 
         "l")
-            skip_link=true
+            run_links=true
+            ;;
+
+        "a")
+            run_packages=true
+            run_suckless=true
+            run_links=true
             ;;
 
         *)
-            usage
+            die "flag -$arg not found"
             exit 1
             ;;
     esac
 done
 shift $((OPTIND - 1))
+
+if [ "$run_packages" = false ] && [ "$run_suckless" = false ] && [ "$run_links" = false ]; then
+    die "nothing to do: no flags are set"
+fi
 
 REQUIRED_PACKAGES=(
     stow
@@ -91,7 +113,7 @@ REQUIRED_PACKAGES=(
     fish ripgrep fd git
     ttf-fira-code
     mold
-    nvim npm
+    nvim npm silicon
 )
 SUCKLESS_DIR="$HOME/suckless"
 SUCKLESS_TOOLS=(dwm slock slstatus st)
@@ -106,19 +128,19 @@ popd() {
 
 install() {
     # Install packages
-    if [ "$skip_package" = false ]; then
+    if [ "$run_packages" = true ]; then
         bold "Installing packages.."
-        yay -S --needed $REQUIRED_PACKAGES
+        yay -S --needed ${REQUIRED_PACKAGES[*]}
     fi
 
     # Symlink dotfiles
-    if [ "$skip_link" = false ]; then
+    if [ "$run_links" = true ]; then
         bold "Creating symlinks..."
         fd -t d -d 1 --strip-cwd-prefix=always -x stow
     fi
 
     # Clone suckless config repos
-    if [ "$skip_suckless" = false ]; then
+    if [ "$run_suckless" = true ]; then
         bold "Clonning suckless tools..."
         mkdir -p "$SUCKLESS_DIR"
         pushd "$SUCKLESS_DIR"
@@ -138,15 +160,14 @@ install() {
 }
 
 clean() {
-    if [ "$skip_suckless" = false ]; then
+    if [ "$run_suckless" = true ]; then
         bold "Checking suckless tools..."
         if [ -d "$SUCKLESS_DIR" ]; then
             pushd "$SUCKLESS_DIR"
             for tool in "${SUCKLESS_TOOLS[@]}"; do
                 pushd "$tool"
                 if [ ! -z "$(git status --porcelain --untracked-files=no)" ]; then
-                    bold "error: directory $(pwd) has unstaged changes" 1>&2
-                    exit 1
+                    die "directory $(pwd) has unstaged changes"
                 fi
                 popd
             done
@@ -157,7 +178,7 @@ clean() {
         rm -rf "$SUCKLESS_DIR"
     fi
 
-    if [ "$skip_link" = false ]; then
+    if [ "$run_links" = true ]; then
         bold "Removing symlinks..."
         fd -t d -d 1 --strip-cwd-prefix=always -x stow -D
     fi
@@ -175,7 +196,6 @@ case "$mode" in
         ;;
 
     *)
-        bold "error: unreachable!!!" 1>&2
-        exit 1
+        die "unreachable!!!"
         ;;
 esac

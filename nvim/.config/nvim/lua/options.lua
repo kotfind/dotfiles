@@ -1,8 +1,3 @@
--- Complete
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.wildmenu = true
-vim.opt.wildmode = { 'longest:full', 'full' }
-
 -- Mouse
 vim.opt.mouse = 'a'
 
@@ -38,11 +33,11 @@ vim.opt.undofile = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 
--- Filetypes
-vim.cmd [[au BufNewFile,BufRead,BufReadPost *.nasm set filetype=nasm]]
-vim.cmd [[au BufNewFile,BufRead,BufReadPost *.pest set filetype=pest]]
-
 -- Preserve cursor position
 vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
     command = [[ silent! normal! g`"zv' ]]
 })
+
+-- Languages
+vim.opt.spell = true
+vim.opt.spelllang = { 'en', 'ru' }
