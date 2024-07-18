@@ -36,6 +36,20 @@ local function setup_comment()
     }
 end
 
+local function setup_persistence()
+    local persistence = require 'persistence'
+    persistence.setup {}
+
+    vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+        nested = true,
+        callback = function()
+            if vim.api.nvim_buf_get_name(0) == '' then
+                persistence.load()
+            end
+        end
+    })
+end
+
 return {
     -- Surround with braces
     { 'kylechui/nvim-surround', opts = {} },
@@ -57,4 +71,10 @@ return {
             'JoosepAlviste/nvim-ts-context-commentstring'
         }
     },
+
+    -- Persistence
+    {
+        'folke/persistence.nvim',
+        config = setup_persistence,
+    }
 }
