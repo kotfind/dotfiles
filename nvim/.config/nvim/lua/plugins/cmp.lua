@@ -106,6 +106,8 @@ local function setup_cmdline()
         },
 
         sources = cmp.config.sources({
+            { name = 'cmdline', },
+        }, {
             { name = 'path' },
             {
                 name = 'buffer',
@@ -115,7 +117,6 @@ local function setup_cmdline()
                     end
                 }
             },
-            { name = 'cmdline', },
         })
     })
 end
