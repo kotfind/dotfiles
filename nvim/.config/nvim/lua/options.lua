@@ -1,8 +1,3 @@
--- Complete
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.wildmenu = true
-vim.opt.wildmode = { 'longest:full', 'full' }
-
 -- Mouse
 vim.opt.mouse = 'a'
 
