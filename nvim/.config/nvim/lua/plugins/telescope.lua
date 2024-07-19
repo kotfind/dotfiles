@@ -21,7 +21,6 @@ local function setup_telescope()
             layout_config = {
                 width = 0.8,
                 prompt_position = 'top',
-                preview_width = 0.5,
             },
         }
     }

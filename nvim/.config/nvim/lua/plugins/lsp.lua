@@ -19,7 +19,7 @@ local function on_attach(client, bufnr)
     bmap('n', 'L', vim.lsp.buf.signature_help)
 
     bmap('n', '<leader>lr', vim.lsp.buf.rename)
-    bmap('n', '<leader>la', vim.lsp.buf.code_action)
+    bmap({ 'n', 'x' }, '<leader>la', vim.lsp.buf.code_action)
     bmap('n', '<leader>lR', vim.lsp.buf.references)
 end
 
