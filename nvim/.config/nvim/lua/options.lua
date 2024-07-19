@@ -41,6 +41,13 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
     command = [[ silent! normal! g`"zv' ]]
 })
 
--- Languages
+-- Spell
 o.spell = true
 o.spelllang = { 'en', 'ru' }
+
+-- Disable spell for terminal window
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+    callback = function()
+        vim.opt_local.spell = false
+    end
+})
