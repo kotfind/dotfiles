@@ -36,11 +36,6 @@ local function setup_treesitter()
         playground = {
             enable = true,
         },
-
-        indent = {
-            enable = true,
-        },
-
     }
 end
 
