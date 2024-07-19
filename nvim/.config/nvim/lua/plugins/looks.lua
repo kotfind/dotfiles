@@ -25,7 +25,12 @@ local function setup_lualine()
     require 'lualine'.setup {
         options = {
             theme = require 'lualine.themes.cyberdream',
+            component_separators = {
+                left = '',
+                right = ''
+            },
         },
+
         sections = {
             lualine_a = {
                 {
@@ -43,7 +48,7 @@ local function setup_lualine()
                 }
             },
             lualine_y = { 'filetype' },
-            lualine_z = { 'progress' },
+            lualine_z = { 'location', 'progress' },
         },
 
         inactive_sections = {
