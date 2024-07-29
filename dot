@@ -68,7 +68,7 @@ run_packages=false
 run_suckless=false
 run_links=false
 
-while getopts ":hpsls" arg; do
+while getopts ":hpsla" arg; do
     case "$arg" in
         "h")
             usage
