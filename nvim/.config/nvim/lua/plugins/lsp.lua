@@ -1,3 +1,36 @@
+function LspExec(command, ...)
+    local function handler(results)
+        for _, result in ipairs(results) do
+            if result.error ~= nil then
+                error("failed to execute comand '" .. command .. "': " .. result.error.message)
+            end
+        end
+    end
+
+    vim.lsp.buf_request_all(
+        0,
+        'workspace/executeCommand',
+        {
+            command = command,
+            arguments = { ... },
+        },
+        handler
+    )
+end
+
+local function typst_pin_main()
+    local handle = io.popen [[ find . -type f -name 'main.typ' -printf "file://$PWD/%f" ]]
+    if handle == nil then
+        error("popen failed")
+    end
+
+    local file_uri = handle:read("a")
+    local fd_res = handle:close()
+    if fd_res and file_uri ~= "" then
+        LspExec('typst-lsp.doPinMain', file_uri)
+    end
+end
+
 local function on_attach(client, bufnr)
     -- Disable lsp highlighting
     client.server_capabilities.semanticTokensProvider = nil
@@ -62,6 +95,9 @@ local function setup_lsp()
             end
         end
     })
+
+    -- Typst pin main
+    vim.api.nvim_create_user_command('TypstPinMain', typst_pin_main, {})
 end
 
 local function setup_mason_lspconfig()
@@ -118,6 +154,16 @@ local function setup_mason_lspconfig()
                 },
             }
         end,
+
+        ['typst_lsp'] = function()
+            lspconfig.typst_lsp.setup {
+                on_attach = on_attach,
+                capabilities = capabilities(),
+                settings = {
+                    exportPdf = 'onPinnedMainType'
+                }
+            }
+        end
     }
 end
 
