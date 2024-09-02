@@ -145,11 +145,16 @@ install() {
         mkdir -p "$SUCKLESS_DIR"
         pushd "$SUCKLESS_DIR"
         for tool in "${SUCKLESS_TOOLS[@]}"; do
+            just_clonned=false
             if [ ! -d "$tool" ]; then
                 git clone "git@github.com:kotfind/${tool}-config.git" "$tool"
+                just_clonned=true
             fi
 
             pushd "$tool"
+            if [ "$just_clonned" = false ]; then
+                git pull
+            fi
             make && sudo make install
             popd
         done
