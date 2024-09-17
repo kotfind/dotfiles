@@ -51,7 +51,7 @@ local function setup_normal()
                     path = '[Path]',
                     calc = '[Calc]',
                     luasnip = '[Snip]',
-                    spell = '[Spell]',
+                    -- spell = '[Spell]',
                 })[entry.source.name]
                 return vim_item
             end,
@@ -70,14 +70,14 @@ local function setup_normal()
                 }
             },
             { name = 'path' },
-            {
-                name = 'spell',
-                option = {
-                    enable_in_context = function(params)
-                        return require 'cmp.config.context'.in_treesitter_capture('spell')
-                    end,
-                }
-            },
+            -- {
+            --     name = 'spell',
+            --     option = {
+            --         enable_in_context = function(params)
+            --             return require 'cmp.config.context'.in_treesitter_capture('spell')
+            --         end,
+            --     }
+            -- },
         }),
     }
 end
@@ -163,7 +163,7 @@ return {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-calc',
-            'f3fora/cmp-spell',
+            -- 'f3fora/cmp-spell',
             'saadparwaiz1/cmp_luasnip',
             'L3MON4D3/cmp-luasnip-choice',
             'L3MON4D3/LuaSnip',
