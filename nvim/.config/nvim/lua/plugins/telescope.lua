@@ -36,6 +36,7 @@ local function setup_telescope()
     Map('n', '<leader>fS', builtin.lsp_workspace_symbols)
     Map('n', '<leader>fe', function() builtin.diagnostics { bufnr = 0, severity_limit = "WARN" } end)
     Map('n', '<leader>fE', function() builtin.diagnostics { severity_limit = "WARN" } end)
+    Map('n', '<leader>fl', builtin.spell_suggest)
 end
 
 return {
