@@ -101,6 +101,24 @@ local function setup_snippets()
         ]], {
             body = i(1)
         })),
+
+        -- BLK
+        s('blk', fmt([[
+            #blk[
+                {body}
+            ]
+        ]], {
+            body = i(1)
+        })),
+
+        -- PROOF
+        s('proof', fmt([[
+            #proof[
+                {body}
+            ]
+        ]], {
+            body = i(1)
+        })),
     })
 end
 
