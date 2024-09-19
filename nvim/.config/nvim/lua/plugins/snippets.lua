@@ -11,9 +11,6 @@ local function setup_snippets()
 
     ls.setup {}
 
-    Map('i', '<C-j>', function() ls.jump(1) end)
-    Map('i', '<C-k>', function() ls.jump(-1) end)
-
     ls.add_snippets('typst', {
         -- Figure TAB
         s('ftab', fmt([[
