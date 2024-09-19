@@ -85,6 +85,22 @@ local function setup_snippets()
             day_rep = rep(3),
             pos = i(0)
         })),
+
+        -- Def
+        s('def', fmt([[
+            #def[
+                {body}
+            ]
+        ]], {
+            body = i(1)
+        })),
+
+        -- DefItem
+        s('di', fmt([[
+            #defitem[{body}]
+        ]], {
+            body = i(1)
+        })),
     })
 end
 
