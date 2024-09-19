@@ -7,6 +7,7 @@ local function setup_snippets()
     local d = ls.dynamic_node
     local sn = ls.snippet_node
     local fmt = require 'luasnip.extras.fmt'.fmt
+    local rep = require 'luasnip.extras'.rep
 
     ls.setup {}
 
@@ -71,7 +72,22 @@ local function setup_snippets()
             caption = i(1),
             source = i(2),
             height = i(3, "3cm"),
-        }))
+        })),
+
+        -- DATE FILE
+        s('datestamp-include', fmt([[
+            #datestamp("{year}-{month}-{day}")
+            #include "{year_rep}-{month_rep}-{day_rep}.typ"
+            {pos}
+        ]], {
+            year = i(1, os.date("%Y")),
+            month = i(2, os.date("%m")),
+            day = i(3, os.date("%d")),
+            year_rep = rep(1),
+            month_rep = rep(2),
+            day_rep = rep(3),
+            pos = i(0)
+        })),
     })
 end
 
