@@ -5,9 +5,11 @@ local function setup_snippets()
     local i = ls.insert_node
     local f = ls.function_node
     local d = ls.dynamic_node
+    local r = ls.restore_node
     local sn = ls.snippet_node
     local fmt = require 'luasnip.extras.fmt'.fmt
     local rep = require 'luasnip.extras'.rep
+    local k = require("luasnip.nodes.key_indexer").new_key
 
     ls.setup {}
 
@@ -119,6 +121,54 @@ local function setup_snippets()
         ]], {
             body = i(1)
         })),
+
+        -- POLYnomial
+        s('poly', {
+            i(1, 'a'), t('_'), i(2, '0'), t(' + '),
+            d(3, function(args)
+                local coef = args[1][1]
+                local index0 = args[2][1]
+                local index0_num = tonumber(index0)
+
+                local function delta_index(index, delta)
+                    local index_num = tonumber(index)
+
+                    if index_num == nil then
+                        if delta == 0 then
+                            return '(' .. index .. ')'
+                        end
+
+                        local delta_sgn = delta > 0 and '+' or '-'
+                        local delta_abs = math.abs(delta)
+                        return '(' .. index .. ' ' .. delta_sgn .. ' ' .. delta_abs .. ')'
+                    else
+                        return tostring(index_num + delta)
+                    end
+                end
+
+                return sn(nil, {
+                    t(coef .. '_' .. delta_index(index0, 1) .. ' '),
+                    i(1, 'x'),
+                    f(function(args)
+                        local var = args[1][1]
+                        local index_back_0 = args[2][1]
+
+                        return ' + ' ..
+                            coef ..
+                            '_' ..
+                            delta_index(index0, 2) ..
+                            ' ' ..
+                            var ..
+                            '^' ..
+                            delta_index(index0, 2) ..
+                            ' + ... + ' ..
+                            coef ..
+                            '_' .. delta_index(index_back_0, -1) .. ' ' .. var .. '^' .. delta_index(index_back_0, -1)
+                    end, { 1, 2 }),
+                    t(' + ' .. coef .. '_'), i(2, 'n'), t(' '), rep(1), t('^'), rep(2)
+                })
+            end, { 1, 2 }),
+        }),
     })
 end
 
