@@ -169,6 +169,16 @@ local function setup_snippets()
                 })
             end, { 1, 2 }),
         }),
+
+        -- CODE
+        s('code', fmt([[
+            ```{lang}
+            {body}
+            ```
+        ]], {
+            lang = i(1, "lang"),
+            body = i(0)
+        })),
     })
 end
 
