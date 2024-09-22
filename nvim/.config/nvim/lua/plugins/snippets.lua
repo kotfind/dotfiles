@@ -179,6 +179,22 @@ local function setup_snippets()
             lang = i(1, "lang"),
             body = i(0)
         })),
+
+        -- Math
+        s('m', fmt([[
+            ${math}${pos}
+        ]], {
+            math = i(1),
+            pos = i(0),
+        })),
+
+        -- Math
+        s('M', fmt([[
+            $ {math} $ {pos}
+        ]], {
+            math = i(1),
+            pos = i(0),
+        })),
     })
 end
 
