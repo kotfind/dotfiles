@@ -13,6 +13,10 @@ local function setup_snippets()
 
     ls.setup {}
 
+    ls.config.setup {
+        enable_autosnippets = true,
+    }
+
     ls.add_snippets('typst', {
         -- Figure TAB
         s('ftab', fmt([[
@@ -194,6 +198,30 @@ local function setup_snippets()
         ]], {
             math = i(1),
             pos = i(0),
+        })),
+
+        -- subscript
+        -- example: A123 -> A_123
+        s({
+            trig = '(%a)(%d+)',
+            regTrig = true,
+            snippetType = 'autosnippet',
+        }, {
+            f(function(args, snip)
+                return snip.captures[1] .. '_' .. snip.captures[2]
+            end)
+        }),
+
+        -- SeQ
+        s('sq', fmt([[
+            {var}_{idx_from} {symb} ... {symb_rep} {var_rep}_{idx_to}
+        ]], {
+            var = i(1, 'A'),
+            var_rep = rep(1),
+            idx_from = i(2, '1'),
+            symb = i(3, ','),
+            symb_rep = rep(3),
+            idx_to = i(4, 'n'),
         })),
     })
 end
