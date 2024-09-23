@@ -190,7 +190,7 @@ local function setup_snippets()
 
         -- Math
         s('M', fmt([[
-            $ {math} $ {pos}
+            $ {math} ${pos}
         ]], {
             math = i(1),
             pos = i(0),
