@@ -214,14 +214,12 @@ local function setup_snippets()
 
         -- SeQ
         s('sq', fmt([[
-            {var}_{idx_from} {symb} ... {symb_rep} {var_rep}_{idx_to}
+            {var}_{idx_from}, ...,  {var_rep}_{idx_to}
         ]], {
             var = i(1, 'A'),
             var_rep = rep(1),
             idx_from = i(2, '1'),
-            symb = i(3, ','),
-            symb_rep = rep(3),
-            idx_to = i(4, 'n'),
+            idx_to = i(3, 'n'),
         })),
     })
 end
