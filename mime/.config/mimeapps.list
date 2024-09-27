@@ -1,0 +1,8 @@
+[Default Applications]
+application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
+image/jpeg=sxiv.desktop;
+image/heif=sxiv-usercreated-1.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
