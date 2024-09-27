@@ -221,6 +221,16 @@ local function setup_snippets()
             idx_from = i(2, '1'),
             idx_to = i(3, 'n'),
         })),
+
+        -- SUM
+        s('sum', fmt([[
+            sum_({i} = {from})^{to} {pos}
+        ]], {
+            i = i(1, 'i'),
+            from = i(2, '1'),
+            to = i(3, 'n'),
+            pos = i(0),
+        }))
     })
 end
 
