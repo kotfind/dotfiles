@@ -10,6 +10,7 @@ fish_add_path /usr/lib/qt6/
 fish_add_path /usr/lib/qt6/bin
 fish_add_path /opt
 fish_add_path ~/.cargo/bin
+fish_add_path /opt/android-sdk/cmdline-tools/latest/bin
 
 # Reset abbreviations
 set -g fish_user_abbreviations

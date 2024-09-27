@@ -32,8 +32,8 @@ local function typst_pin_main()
 end
 
 local function on_attach(client, bufnr)
-    -- Disable lsp highlighting
-    client.server_capabilities.semanticTokensProvider = nil
+    -- -- Disable lsp highlighting
+    -- client.server_capabilities.semanticTokensProvider = nil
 
     -- Buffer Mappings
     local function bmap(modes, key, func)
@@ -90,7 +90,7 @@ local function setup_lsp()
     -- Format on save
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
         callback = function()
-            if vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "c" then
+            if vim.bo.filetype ~= 'cpp' and vim.bo.filetype ~= 'c' and vim.bo.filetype ~= 'kotlin' then
                 vim.lsp.buf.format()
             end
         end
@@ -114,6 +114,7 @@ local function setup_mason_lspconfig()
             'typst_lsp',
             'pest_ls',
             'bashls',
+            'kotlin_language_server',
         },
     }
 
