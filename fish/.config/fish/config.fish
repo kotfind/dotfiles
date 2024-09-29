@@ -39,6 +39,7 @@ alias gl 'git log'
 alias gt 'git log --graph --all --oneline --decorate'
 alias gch 'git checkout'
 alias gb 'git branch'
+alias root 'cd (git rev-parse --show-toplevel)'
 
 # Prompt
 function fish_prompt
