@@ -4,6 +4,7 @@ end
 
 # Variables
 set -gx EDITOR nvim
+set -gx ANDROID_HOME /opt/android-sdk/
 
 # Path
 fish_add_path /usr/lib/qt6/
