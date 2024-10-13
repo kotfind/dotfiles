@@ -9,5 +9,8 @@ export XMODIFIERS='@im=ibus'
 # export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
 # export QT_STYLE_OVERRIDE=Adwaita-Dark
 
+# for some java gui apps to work:
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # dwm
 exec dwm 2> ~/.dwm.log
