@@ -32,8 +32,8 @@ local function typst_pin_main()
 end
 
 local function on_attach(client, bufnr)
-    -- -- Disable lsp highlighting
-    -- client.server_capabilities.semanticTokensProvider = nil
+    -- Disable lsp highlighting
+    client.server_capabilities.semanticTokensProvider = nil
 
     -- Buffer Mappings
     local function bmap(modes, key, func)
