@@ -90,7 +90,7 @@ local function setup_lsp()
     -- Format on save
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
         callback = function()
-            if vim.bo.filetype ~= 'cpp' and vim.bo.filetype ~= 'c' then
+            if vim.bo.filetype ~= 'cpp' and vim.bo.filetype ~= 'c' and vim.bo.filetype ~= 'kotlin' then
                 vim.lsp.buf.format()
             end
         end
