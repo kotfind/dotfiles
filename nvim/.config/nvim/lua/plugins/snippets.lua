@@ -15,6 +15,7 @@ local function setup_snippets()
 
     ls.config.setup {
         enable_autosnippets = true,
+        store_selection_keys = '<C-j>',
     }
 
     ls.add_snippets('typst', {
@@ -174,8 +175,16 @@ local function setup_snippets()
             end, { 1, 2 }),
         }),
 
-        -- CODE
-        s('code', fmt([[
+        -- Code
+        s('c', fmt([[
+            `{code}`{pos}
+        ]], {
+            lang = i(1),
+            body = i(0)
+        })),
+
+        -- Code
+        s('C', fmt([[
             ```{lang}
             {body}
             ```
@@ -230,7 +239,7 @@ local function setup_snippets()
             from = i(2, '1'),
             to = i(3, 'n'),
             pos = i(0),
-        }))
+        })),
     })
 end
 
