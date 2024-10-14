@@ -177,20 +177,20 @@ local function setup_snippets()
 
         -- Code
         s('c', fmt([[
-            `{code}`{pos}
+            `{body}`{pos}
         ]], {
-            lang = i(1),
-            body = i(0)
+            body = i(1),
+            pos = i(0)
         })),
 
         -- Code
         s('C', fmt([[
             ```{lang}
-            {body}
+            {pos}
             ```
         ]], {
             lang = i(1, "lang"),
-            body = i(0)
+            pos = i(0)
         })),
 
         -- Math
