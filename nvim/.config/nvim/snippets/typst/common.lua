@@ -1,14 +1,11 @@
 return {
-    -- Figure TAB
-    s('ftab', fmt([[
-        #figure(
-            caption: [{caption}],
-            table(
-                columns: {columns},
-                table.header{header},
-                {body}{print_pos}
-            )
-        )
+    -- Advanced TABle
+    s('atab', fmt([[
+        #figure(caption: [{caption}], table(
+            columns: {columns},
+            table.header{header},
+            {body}{print_pos}
+        ))
     ]], {
         caption = i(1),
         columns = i(2),
@@ -44,6 +41,18 @@ return {
             return sn(nil, ans_nodes)
         end, { 2 }),
         print_pos = i(0),
+    })),
+
+    -- TABle
+    s('tab', fmt([[
+        #figure(table(
+            columns: {columns},
+            align: center,
+            {pos}
+        ))
+    ]], {
+        columns = i(1),
+        pos = i(0),
     })),
 
     -- Figure IMage
@@ -121,7 +130,7 @@ return {
         {pos}
         ```
     ]], {
-        lang = i(1, "lang"),
+        lang = i(1, 'lang'),
         pos = i(0)
     })),
 

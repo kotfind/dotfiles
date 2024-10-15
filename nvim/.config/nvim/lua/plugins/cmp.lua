@@ -55,6 +55,14 @@ local function setup_normal()
                     fallback()
                 end
             end),
+
+            ['<C-l>'] = cmp.mapping(function(fallback)
+                luasnip.change_choise(1)
+            end),
+
+            ['<C-L>'] = cmp.mapping(function(fallback)
+                luasnip.change_choise(-1)
+            end),
         },
 
         formatting = {
