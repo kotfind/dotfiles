@@ -149,7 +149,7 @@ local function setup_mason_lspconfig()
                 settings = {
                     Lua = {
                         diagnostics = {
-                            globals = { 'vim' },
+                            globals = { 'vim', 's', 't', 'i', 'f', 'd', 'r', 'sn', 'fmt', 'rep', 'k' },
                         },
                     },
                 },
