@@ -1,3 +1,19 @@
+local function selection_or_insert(_, snip)
+    local selection = {}
+    for _, line in ipairs(snip.env.LS_SELECT_RAW) do
+        table.insert(selection, line)
+    end
+
+    local res = {}
+    if next(selection) ~= nil then
+        table.insert(res, t(selection))
+    else
+        table.insert(res, i(1))
+    end
+
+    return sn(nil, res)
+end
+
 return {
     -- Advanced TABle
     s('atab', fmt([[
@@ -71,7 +87,6 @@ return {
     s('datestamp-include', fmt([[
         #datestamp("{year}-{month}-{day}")
         #include "{year_rep}-{month_rep}-{day_rep}.typ"
-        {pos}
     ]], {
         year = i(1, os.date("%Y")),
         month = i(2, os.date("%m")),
@@ -79,7 +94,6 @@ return {
         year_rep = rep(1),
         month_rep = rep(2),
         day_rep = rep(3),
-        pos = i(0)
     })),
 
     -- Def
@@ -88,14 +102,14 @@ return {
             {body}
         ]
     ]], {
-        body = i(1)
+        body = d(1, selection_or_insert, {})
     })),
 
     -- DefItem
     s('di', fmt([[
         #defitem[{body}]
     ]], {
-        body = i(1)
+        body = d(1, selection_or_insert, {})
     })),
 
     -- BLK
@@ -104,7 +118,7 @@ return {
             {body}
         ]
     ]], {
-        body = i(1)
+        body = d(1, selection_or_insert, {})
     })),
 
     -- PROOF
@@ -113,50 +127,37 @@ return {
             {body}
         ]
     ]], {
-        body = i(1)
+        body = d(1, selection_or_insert, {})
     })),
 
     -- Code
     s('c', fmt([[
-        `{body}`{pos}
+        `{body}`
     ]], {
-        body = i(1),
-        pos = i(0)
+        body = d(1, selection_or_insert, {}),
     })),
 
     -- Code
     s('C', fmt([[
         ```{lang}
-        {pos}
+        {body}
         ```
     ]], {
         lang = i(1, 'lang'),
-        pos = i(0)
+        body = d(2, selection_or_insert, {}),
     })),
 
     -- Math
     s('m', fmt([[
-        ${math}${pos}
+        ${math}$
     ]], {
-        math = i(1),
-        pos = i(0),
+        math = d(1, selection_or_insert, {}),
     })),
 
     -- Math
     s('M', fmt([[
-        $ {math} ${pos}
+        $ {math} $
     ]], {
-        math = i(1),
-        pos = i(0),
-    })),
-
-    -- SUM
-    s('sum', fmt([[
-        sum_({i} = {from})^{to} {pos}
-    ]], {
-        i = i(1, 'i'),
-        from = i(2, '1'),
-        to = i(3, 'n'),
-        pos = i(0),
+        math = d(1, selection_or_insert, {}),
     })),
 }

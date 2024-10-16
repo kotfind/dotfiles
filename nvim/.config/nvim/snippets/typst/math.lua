@@ -63,6 +63,19 @@ return {
         idx_from = i(2, '1'),
         idx_to = i(3, 'n'),
     })),
+
+    -- SUM
+    s({
+        trig = 'sum',
+        condition = in_math,
+    }, fmt([[
+        sum_({i} = {from})^{to} {pos}
+    ]], {
+        i = i(1, 'i'),
+        from = i(2, '1'),
+        to = i(3, 'n'),
+        pos = i(0),
+    })),
 }, {
     -------------------- AUTOSNIPPETS --------------------
 
