@@ -51,6 +51,13 @@ function InTreeSitterNode(node_type)
     return false
 end
 
+function InTreeSitterTopLevelNode()
+    local ts_utils = require 'nvim-treesitter.ts_utils'
+    local node = ts_utils.get_node_at_cursor()
+    print(node:parent())
+    return node:parent() == nil
+end
+
 return {
     {
         'nvim-treesitter/nvim-treesitter',

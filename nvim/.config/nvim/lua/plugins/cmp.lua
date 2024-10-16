@@ -40,7 +40,7 @@ local function setup_normal()
                 end
             end, { 'i', 's' }),
 
-            ['<C-j>'] = cmp.mapping(function(fallback)
+            ['<C-l>'] = cmp.mapping(function(fallback)
                 if luasnip.jumpable(1) then
                     luasnip.jump(1)
                 else
@@ -48,7 +48,7 @@ local function setup_normal()
                 end
             end),
 
-            ['<C-k>'] = cmp.mapping(function(fallback)
+            ['<C-h>'] = cmp.mapping(function(fallback)
                 if luasnip.jumpable(-1) then
                     luasnip.jump(-1)
                 else
@@ -56,12 +56,12 @@ local function setup_normal()
                 end
             end),
 
-            ['<C-l>'] = cmp.mapping(function(fallback)
-                luasnip.change_choise(1)
+            ['<C-j>'] = cmp.mapping(function(fallback)
+                luasnip.change_choice(-1)
             end),
 
-            ['<C-L>'] = cmp.mapping(function(fallback)
-                luasnip.change_choise(-1)
+            ['<C-k>'] = cmp.mapping(function(fallback)
+                luasnip.change_choice(1)
             end),
         },
 
