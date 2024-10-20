@@ -44,6 +44,11 @@ alias gm 'git merge'
 
 alias root 'cd (git rev-parse --show-toplevel)'
 
+# Path aliases
+for i in (seq 3 10)
+    alias (string repeat -n$i '.')="cd $(string repeat -n (math $i - 1) '../')"
+end
+
 # Prompt
 function fish_prompt
     set -l last_status $status
