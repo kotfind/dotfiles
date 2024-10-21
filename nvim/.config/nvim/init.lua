@@ -2,6 +2,7 @@
 require 'keymaps'
 require 'options'
 require 'silicon'
+require 'run_app'
 
 -- Init lazy
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
