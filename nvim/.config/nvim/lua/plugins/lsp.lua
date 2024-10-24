@@ -138,6 +138,9 @@ local function setup_mason_lspconfig()
                         method = 'connect',
                         server = 'rust-analyzer',
                     },
+                    checkOnSave = {
+                        command = "clippy",
+                    },
                 },
             }
         end,
