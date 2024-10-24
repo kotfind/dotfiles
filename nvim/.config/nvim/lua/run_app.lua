@@ -14,9 +14,10 @@ local function get_triggers()
     local cxxflags = cflags
 
     return {
-        { file = 'run',        run = './run' },
-        { ft = 'python',       run = 'python3 ' .. file },
-        { file = 'Cargo.toml', run = 'cargo run' },
+        { file = 'run',     run = './run' },
+        { ft = 'python',    run = 'python3 ' .. file },
+        { file = 'main.rs', run = 'cargo run' },
+        { file = 'lib.rs',  run = 'cargo test' },
         {
             file = 'CMakeLists.txt',
             run = [[
@@ -29,6 +30,7 @@ local function get_triggers()
         { file = 'Makefile', run = 'make -j4 && make run', },
         { ft = 'c',          run = string.format('gcc %s %s -o %s && %s', file, cflags, tmpfile, tmpfile), },
         { ft = 'cpp',        run = string.format('g++ %s %s -o %s && %s', file, cxxflags, tmpfile, tmpfile), },
+        { ft = 'typst',      run = string.format('typst compile %s %s.pdf && zathura %s.pdf', file, tmpfile, tmpfile), },
     }
 end
 
@@ -58,6 +60,12 @@ end
 
 -- Returns true if trigger worked.
 local function try_file_trigger(trigger, cmd_pref)
+    if vim.bo.buftype == 'terminal' then
+        -- XXX: temporary solution
+        -- Better to navigate to last non-terminal buffer
+        return false
+    end
+
     local dir = vim.fn.expand('%:p:h')
     while true do
         if vim.fn.filereadable(dir .. '/' .. trigger.file) == 1 then
