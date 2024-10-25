@@ -4,5 +4,6 @@ image/heif=sxiv-usercreated-1.desktop;
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
+text/html=firefox.desktop;
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
