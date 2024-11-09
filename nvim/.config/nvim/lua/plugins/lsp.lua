@@ -32,8 +32,10 @@ local function typst_pin_main()
 end
 
 local function on_attach(client, bufnr)
-    -- Disable lsp highlighting
-    client.server_capabilities.semanticTokensProvider = nil
+    -- Disable lsp highlighting for typst (it's broken)
+    if vim.bo.filetype == 'typst' then
+        client.server_capabilities.semanticTokensProvider = nil
+    end
 
     -- Buffer Mappings
     local function bmap(modes, key, func)
@@ -139,7 +141,7 @@ local function setup_mason_lspconfig()
                         server = 'rust-analyzer',
                     },
                     checkOnSave = {
-                        command = "clippy",
+                        command = 'clippy',
                     },
                 },
             }
