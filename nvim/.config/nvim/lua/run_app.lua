@@ -10,7 +10,7 @@
 local function get_triggers()
     local file = vim.api.nvim_buf_get_name(0)
     local tmpfile = vim.fn.tempname();
-    local cflags = '-Wall -Wextra -Wpedantic -fsanitize=undefined,address -fanalyzer -g3 -O0'
+    local cflags = '-Wall -Wextra -Wpedantic -fsanitize=undefined,address -g3 -O0'
     local cxxflags = cflags
 
     return {

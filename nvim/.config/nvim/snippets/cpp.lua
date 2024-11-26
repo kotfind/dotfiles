@@ -126,7 +126,9 @@ return {
 
     s('class', fmta([[
         class <name> {
-            <body>
+            public:
+            private:
+                <body>
         };
     ]], {
         name = i(1, 'MyClass'),

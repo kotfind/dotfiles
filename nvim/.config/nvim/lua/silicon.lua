@@ -24,7 +24,7 @@ local function silicon_cmd(opts)
     -- TODO: gobble
 
     -- Constants
-    local OUTPUT_FMT = '/tmp/TmpScreenshots/silicon-%s.png'
+    local OUTPUT_FMT = '/tmp/screenshots/silicon-%s.png'
 
     -- General options
     local flags = ''
