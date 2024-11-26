@@ -18,17 +18,23 @@ function LspExec(command, ...)
     )
 end
 
-local function typst_pin_main()
-    local handle = io.popen [[ find . -type f -name 'main.typ' -printf "file://$PWD/%f" ]]
-    if handle == nil then
-        error("popen failed")
-    end
+local function setup_typst_preview()
+    require 'typst-preview'.setup {
+        open_cmd = 'firefox --new-window %s',
 
-    local file_uri = handle:read("a")
-    local fd_res = handle:close()
-    if fd_res and file_uri ~= "" then
-        LspExec('typst-lsp.doPinMain', file_uri)
-    end
+        dependencies_bin = {
+            ['tinymist'] = vim.fn.stdpath('data') .. '/mason/bin/tinymist',
+            ['websocat'] = '/usr/bin/websocat',
+        },
+
+        get_main_file = function(bufpath)
+            if vim.fn.filereadable('main.typ') then
+                return 'main.typ'
+            else
+                return bufpath
+            end
+        end,
+    }
 end
 
 local function on_attach(client, bufnr)
@@ -97,9 +103,6 @@ local function setup_lsp()
             end
         end
     })
-
-    -- Typst pin main
-    vim.api.nvim_create_user_command('TypstPinMain', typst_pin_main, {})
 end
 
 local function setup_mason_lspconfig()
@@ -113,7 +116,7 @@ local function setup_mason_lspconfig()
             'rust_analyzer',
             'lua_ls',
             'cssls',
-            'typst_lsp',
+            'tinymist',
             'pest_ls',
             'bashls',
             'kotlin_language_server',
@@ -161,15 +164,16 @@ local function setup_mason_lspconfig()
             }
         end,
 
-        ['typst_lsp'] = function()
-            lspconfig.typst_lsp.setup {
-                on_attach = on_attach,
-                capabilities = capabilities(),
-                settings = {
-                    exportPdf = 'onPinnedMainType'
-                }
-            }
-        end
+        -- ['tinymist'] = function()
+        --     lspconfig.tinymist.setup {
+        --         on_attach = on_attach,
+        --         capabilities = capabilities(),
+        --         settings = {
+        --             exportPdf = 'onType',
+        --             outputPath = '$name',
+        --         }
+        --     }
+        -- end
     }
 end
 
@@ -209,5 +213,10 @@ return {
     {
         'stevearc/dressing.nvim',
         opts = {},
+    },
+
+    {
+        'chomosuke/typst-preview.nvim',
+        config = setup_typst_preview,
     },
 }
