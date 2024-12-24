@@ -29,7 +29,7 @@ local function get_triggers()
         },
         { file = 'Makefile', run = 'make -j4 && make run', },
         { ft = 'c',          run = string.format('gcc %s %s -o %s && %s', file, cflags, tmpfile, tmpfile), },
-        { ft = 'cpp',        run = string.format('g++ %s %s -o %s && %s', file, cxxflags, tmpfile, tmpfile), },
+        { ft = 'cpp',        run = string.format('g++ %s %s -std=c++20 -o %s && %s', file, cxxflags, tmpfile, tmpfile), },
         { ft = 'typst',      run = string.format('typst compile %s %s.pdf && zathura %s.pdf', file, tmpfile, tmpfile), },
     }
 end
