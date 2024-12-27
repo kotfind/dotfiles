@@ -31,7 +31,6 @@ $(bold "Modes:")
 $(bold "Options:")
     $(bold "-h")    Print this message.
     $(bold "-p")    Run package step (for install mode only).
-    $(bold "-s")    Run suckless tools step.
     $(bold "-l")    Run link step.
     $(bold "-a")    Run all steps. Same as -psl.
 END
@@ -65,10 +64,9 @@ esac
 shift 1
 
 run_packages=false
-run_suckless=false
 run_links=false
 
-while getopts ":hpsla" arg; do
+while getopts ":hpla" arg; do
     case "$arg" in
         "h")
             usage
@@ -79,17 +77,12 @@ while getopts ":hpsla" arg; do
             run_packages=true
             ;;
 
-        "s")
-            run_suckless=true
-            ;;
-
         "l")
             run_links=true
             ;;
 
         "a")
             run_packages=true
-            run_suckless=true
             run_links=true
             ;;
 
@@ -101,7 +94,7 @@ while getopts ":hpsla" arg; do
 done
 shift $((OPTIND - 1))
 
-if [ "$run_packages" = false ] && [ "$run_suckless" = false ] && [ "$run_links" = false ]; then
+if [ "$run_packages" = false ] && [ "$run_links" = false ]; then
     die "nothing to do: no flags are set"
 fi
 
@@ -115,8 +108,6 @@ REQUIRED_PACKAGES=(
     mold
     nvim npm silicon
 )
-SUCKLESS_DIR="$HOME/suckless"
-SUCKLESS_TOOLS=(dwm slock slstatus st)
 
 pushd() {
     command pushd "$@" > /dev/null
@@ -139,50 +130,10 @@ install() {
         fd -t d -d 1 --strip-cwd-prefix=always -x stow
     fi
 
-    # Clone suckless config repos
-    if [ "$run_suckless" = true ]; then
-        bold "Clonning suckless tools..."
-        mkdir -p "$SUCKLESS_DIR"
-        pushd "$SUCKLESS_DIR"
-        for tool in "${SUCKLESS_TOOLS[@]}"; do
-            just_clonned=false
-            if [ ! -d "$tool" ]; then
-                git clone "git@github.com:kotfind/${tool}-config.git" "$tool"
-                just_clonned=true
-            fi
-
-            pushd "$tool"
-            if [ "$just_clonned" = false ]; then
-                git pull
-            fi
-            make && sudo make install
-            popd
-        done
-        popd
-    fi
-
     bold "Installation successful."
 }
 
 clean() {
-    if [ "$run_suckless" = true ]; then
-        bold "Checking suckless tools..."
-        if [ -d "$SUCKLESS_DIR" ]; then
-            pushd "$SUCKLESS_DIR"
-            for tool in "${SUCKLESS_TOOLS[@]}"; do
-                pushd "$tool"
-                if [ ! -z "$(git status --porcelain --untracked-files=no)" ]; then
-                    die "directory $(pwd) has unstaged changes"
-                fi
-                popd
-            done
-            popd
-        fi
-
-        bold "Removing suckless tools..."
-        rm -rf "$SUCKLESS_DIR"
-    fi
-
     if [ "$run_links" = true ]; then
         bold "Removing symlinks..."
         fd -t d -d 1 --strip-cwd-prefix=always -x stow -D

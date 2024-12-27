@@ -13,4 +13,4 @@ export XMODIFIERS='@im=ibus'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # dwm
-exec dwm 2> ~/.dwm.log
+exec bspwm 2> ~/.bspwm.log

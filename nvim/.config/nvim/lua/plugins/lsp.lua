@@ -117,7 +117,7 @@ local function setup_mason_lspconfig()
             'lua_ls',
             'cssls',
             'tinymist',
-            'pest_ls',
+            -- 'pest_ls',
             'bashls',
             'kotlin_language_server',
         },
