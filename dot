@@ -99,7 +99,6 @@ if [ "$run_packages" = false ] && [ "$run_links" = false ]; then
 fi
 
 REQUIRED_PACKAGES=(
-    stow
     xorg-server xorg-xinit
     dmenu exa scrot xclip light pamixer
     xss-lock batsignal notification-daemon
@@ -127,7 +126,16 @@ install() {
     # Symlink dotfiles
     if [ "$run_links" = true ]; then
         bold "Creating symlinks..."
-        fd -t d -d 1 --strip-cwd-prefix=always -x stow
+        for dir in */; do
+            pushd "$dir"
+            fd \
+                -H \
+                -t f \
+                --strip-cwd-prefix=always \
+                -x mkdir -p ~/{//} \; \
+                -x sh -c 'ln -sf $(realpath {}) ~/{}' \;
+            popd
+        done
     fi
 
     bold "Installation successful."
@@ -136,7 +144,15 @@ install() {
 clean() {
     if [ "$run_links" = true ]; then
         bold "Removing symlinks..."
-        fd -t d -d 1 --strip-cwd-prefix=always -x stow -D
+        for dir in */; do
+            pushd "$dir"
+            fd \
+                -H \
+                -t f \
+                --strip-cwd-prefix=always \
+                -x rm '~/{}' \;
+            popd
+        done
     fi
 
     bold "Cleaning successful."
