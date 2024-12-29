@@ -1,6 +1,6 @@
 #! /bin/sh
 
-~/autostart.sh
+~/autostart.sh &
 
 # Monitors
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
@@ -8,6 +8,8 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 # Looks
 bspc config border_width         2
 bspc config window_gap          12
+bspc config top_padding         15
+bspc config top_monocle_padding 15
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
