@@ -116,7 +116,6 @@ super + {Left,Down,Up,Right}
 
 super + alt + {h, j, k, l}
     dir={'left','top','bottom','right'}; \
-    bspc query -N -n .focused.floating > /dev/null 2>&1
     step=20; \
     case $dir in \
         'left')   \{ bspc node -z left   -$step 0 || bspc node -z right  -$step 0; \} ;; \
