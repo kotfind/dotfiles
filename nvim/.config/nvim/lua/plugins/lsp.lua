@@ -141,7 +141,7 @@ local function setup_mason_lspconfig()
                     lspMux = {
                         version = '1',
                         method = 'connect',
-                        server = 'rust-analyzer',
+                        server = vim.fn.stdpath('data') .. '/mason/bin/rust-analyzer',
                     },
                     checkOnSave = {
                         command = 'clippy',
