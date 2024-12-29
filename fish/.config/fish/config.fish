@@ -2,6 +2,10 @@ if not status is-interactive
     exit 0
 end
 
+if type -q nix
+    any-nix-shell fish --info-right | source
+end
+
 # Variables
 set -gx EDITOR nvim
 set -gx ANDROID_HOME /opt/android-sdk/
@@ -12,6 +16,7 @@ fish_add_path /usr/lib/qt6/bin
 fish_add_path /opt
 fish_add_path ~/.cargo/bin
 fish_add_path /opt/android-sdk/cmdline-tools/latest/bin
+fish_add_path ~/.nix-profile/bin/
 
 # Reset abbreviations
 set -g fish_user_abbreviations
