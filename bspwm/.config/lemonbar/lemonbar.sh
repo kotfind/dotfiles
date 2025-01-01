@@ -14,7 +14,7 @@ window_title() {
 }
 
 cpu_usage() {
-    local cpu="$(mpstat | grep all | awk '{ printf("%.0f", $4) }')"
+    local cpu="$(top -b -n 1 | grep Cpu | awk '{ printf "%2.0f", $2 }')"
     echo -en "\uf233 $cpu%%"
 }
 
@@ -25,7 +25,6 @@ mem_usage() {
 }
 
 desktops() {
-    # TODO: make those clickable
     local desktops=($(bspc query -D -m .focused --names))
     local current_desktop="$(bspc query -D -d  .focused --names)"
 
@@ -66,7 +65,7 @@ sleep_for=0.1
 
 height=20
 
-bar_width=100
+bar_width=150
 
 cfg() {
     while true; do
