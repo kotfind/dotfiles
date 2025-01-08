@@ -120,6 +120,7 @@ local function setup_mason_lspconfig()
             -- 'pest_ls',
             'bashls',
             'kotlin_language_server',
+            'nil_ls',
         },
     }
 
